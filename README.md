@@ -1,2 +1,2 @@
-# mgl7460_trav_ind
+# Projet Individuel MGL7460-90 (Hiver 2020)
 Travail individuel sur angular Dimension "Équipe de développement"
