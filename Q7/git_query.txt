@@ -1,0 +1,1 @@
+$ git log --pretty='commit:%H %ce %cd %s' --date=short > commit_by_type.txt

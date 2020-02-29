@@ -1,0 +1,4294 @@
+commit d47de60944e0715a6cf54ed54498fa5e4af32b73
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 28 14:50:39 2019 +0100
+
+    fix(ivy): @Component should support entry components from another module (#29566)
+    
+    PR Close #29566
+
+ packages/core/src/render3/jit/module.ts         | 14 ++-------
+ packages/core/src/util/array_utils.ts           |  4 +--
+ packages/core/test/acceptance/component_spec.ts | 41 ++++++++++++++++++++++++-
+ 3 files changed, 44 insertions(+), 15 deletions(-)
+
+commit 6c86ae710aaffd760775c98f3e0f19b3bbb1dd6f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Apr 26 12:05:27 2019 +0200
+
+    fix(ivy): output should not be subscribe twice when 2 listeners (#30144)
+    
+    PR Close #30144
+
+ packages/core/src/render3/instructions/listener.ts |  5 ++-
+ packages/core/test/acceptance/listener_spec.ts     | 37 +++++++++++++++++++++-
+ 2 files changed, 40 insertions(+), 2 deletions(-)
+
+commit d4c4a8943168eae9f7c70f25c42d7b5a6b5ccf8f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 28 12:30:08 2019 +0100
+
+    fix(ivy): host attributes and @COmponentChild should be supported on the same component (#29565)
+    
+    PR Close #29565
+
+ packages/core/src/render3/component.ts            | 12 ++++++------
+ packages/core/test/acceptance/integration_spec.ts | 17 ++++++++++++++++-
+ 2 files changed, 22 insertions(+), 7 deletions(-)
+
+commit 303eae918d997070a36b523ddc97e018f622c258
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 28 16:31:29 2019 +0100
+
+    fix(ivy): querying should be possible on any debug element (#29534)
+    
+    PR Close #29534
+
+ packages/core/src/debug/debug_node.ts       | 55 +++++++++++++++++------------
+ packages/core/test/debug/debug_node_spec.ts | 11 ++++++
+ 2 files changed, 44 insertions(+), 22 deletions(-)
+
+commit 50f7ab2a063768e32430d07fe3a8226211394cb1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 27 10:48:45 2019 +0100
+
+    fix(ivy): debug element should support components with ViewContainerRef (#29534)
+    
+    PR Close #29534
+
+ packages/core/src/debug/debug_node.ts       |  5 ++---
+ packages/core/test/debug/debug_node_spec.ts | 13 +++++++++++++
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+
+commit c4123748543c46aa0e78fb0cfceab265ce926907
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Mar 22 18:24:21 2019 +0100
+
+    fix(ivy): DebugNode.query should query nodes in the logical tree (#29480)
+    
+    PR Close #29480
+
+ .../bazel/test/ng_package/core_package.spec.ts     |   2 +-
+ packages/compiler-cli/test/ngtools_api_spec.ts     |   2 +-
+ packages/core/src/debug/debug_node.ts              | 141 ++++++++++++++++++--
+ .../animation/animation_query_integration_spec.ts  |   2 +-
+ .../animation/animation_router_integration_spec.ts |   1 -
+ packages/core/test/debug/debug_node_spec.ts        | 144 ++++++++++++++++++++-
+ .../core/test/linker/ng_module_integration_spec.ts |   2 +-
+ .../test/linker/projection_integration_spec.ts     | 117 ++++++++---------
+ .../core/test/linker/query_integration_spec.ts     |   2 +-
+ .../core/test/linker/security_integration_spec.ts  |   2 +-
+ .../source_map_integration_node_only_spec.ts       |   2 +-
+ packages/core/test/render3/lifecycle_spec.ts       |   1 -
+ .../animations/test/animation_renderer_spec.ts     |   1 -
+ packages/private/testing/src/ivy_test_selectors.ts |  89 +------------
+ .../material-ci/angular_material_test_blocklist.js |  36 ------
+ 15 files changed, 339 insertions(+), 205 deletions(-)
+
+commit 66b72bfa586a795be924805f6c1e67b988230d6c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 20 15:26:48 2019 +0100
+
+    fix(ivy): ViewContainerRef.destroy should properly clean the DOM (#29414)
+    
+    PR Close #29414
+
+ packages/common/test/directives/ng_switch_spec.ts  |  50 ++++++-
+ .../core/src/render3/instructions/instructions.ts  |   8 +-
+ packages/core/src/render3/interfaces/container.ts  |  25 ++--
+ packages/core/src/render3/node_manipulation.ts     |  31 +++-
+ .../core/src/render3/view_engine_compatibility.ts  |   2 +-
+ .../test/acceptance/view_container_ref_spec.ts     | 166 ++++++++++++++++++++-
+ packages/core/test/render3/view_utils_spec.ts      |   5 +-
+ packages/private/testing/src/goog_get_msg.ts       |   3 +-
+ 8 files changed, 264 insertions(+), 26 deletions(-)
+
+commit 17b3f11e07aa56722cb191d39b5b14f542630bf2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 20 18:25:40 2019 +0100
+
+    fix(ivy): ChangeDetectorRef should be injectable on ng-container (#29424)
+    
+    PR Close #29424
+
+ .../core/src/render3/view_engine_compatibility.ts  |  4 +++-
+ packages/core/test/acceptance/di_spec.ts           | 22 ++++++++++++++++++++++
+ .../material-ci/angular_material_test_blocklist.js |  4 ----
+ 3 files changed, 25 insertions(+), 5 deletions(-)
+
+commit 324902046636f22350f8f03b2bfd678c0c4c9c69
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 20 18:10:21 2019 +0100
+
+    test(ivy): update root cause of failures in MatBadge (#29422)
+    
+    PR Close #29422
+
+ tools/material-ci/angular_material_test_blocklist.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a3e105487d7eb04a00a7b9b1b2d528a2fdedcd15
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 14 10:54:12 2019 +0100
+
+    test(ivy): update blocklist to turn on passing tests (#29300)
+    
+    PR Close #29300
+
+ tools/material-ci/angular_material_test_blocklist.js | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
+
+commit 3f32c0e6747cf69434d8b60122e250e4aed2b672
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Mar 12 17:05:46 2019 +0100
+
+    test(ivy): diagnose root causes of failures in CdkTable and MatTable (#29253)
+    
+    PR Close #29253
+
+ .../material-ci/angular_material_test_blocklist.js | 28 +++++++---------------
+ 1 file changed, 8 insertions(+), 20 deletions(-)
+
+commit af525364195d5531c9f663809400bea64eb1dd6b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Mar 12 17:25:30 2019 +0100
+
+    test(ivy): update root cause of failures in MatSnackBar (#29254)
+    
+    PR Close #29254
+
+ tools/material-ci/angular_material_test_blocklist.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4b9eb6185f0bbc8c14781ddf903d20d060581abe
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 11 17:12:50 2019 +0100
+
+    test(ivy): diagnose root causes of failures in CdkTree and MatTree (#29224)
+    
+    PR Close #29224
+
+ tools/material-ci/angular_material_test_blocklist.js | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+commit eccbc785b30b7cd7b8d22d96ee8389eca8254c69
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 7 16:09:12 2019 +0100
+
+    fix(ivy): ViewRef.detachFromAppRef should clean the DOM (#29159)
+    
+    PR Close #29159
+
+ packages/core/src/render3/node_manipulation.ts     |  9 ++++
+ packages/core/src/render3/view_ref.ts              |  7 ++-
+ packages/core/test/acceptance/view_ref_spec.ts     | 56 ++++++++++++++++++++++
+ .../test/bundling/todo/bundle.golden_symbols.json  |  3 ++
+ .../material-ci/angular_material_test_blocklist.js |  8 ----
+ 5 files changed, 73 insertions(+), 10 deletions(-)
+
+commit 0bd4261f232c10221790626ae085e84403c40c82
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 6 15:57:20 2019 +0100
+
+    test(ivy): diagnose root causes of failures in MatSnackBar (#29134)
+    
+    PR Close #29134
+
+ tools/material-ci/angular_material_test_blocklist.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 25166d4f41b0bb6eb66f598a71c6eba4807acf91
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Mar 1 14:39:28 2019 +0100
+
+    fix(ivy): support property values changed in ngOnChanges (forward rref case) (#29054)
+    
+    PR Close #29054
+
+ integration/_payload-limits.json                   |   2 +-
+ .../test/compliance/r3_compiler_compliance_spec.ts |  21 ++-
+ .../compliance/r3_view_compiler_binding_spec.ts    |   2 +
+ .../test/compliance/r3_view_compiler_i18n_spec.ts  |  41 +++++
+ .../compliance/r3_view_compiler_styling_spec.ts    |   3 +
+ .../compliance/r3_view_compiler_template_spec.ts   |   9 ++
+ packages/compiler/src/render3/r3_identifiers.ts    |   2 +
+ packages/compiler/src/render3/view/template.ts     |  29 ++--
+ packages/core/src/core_render3_private_export.ts   |   1 +
+ packages/core/src/render3/component.ts             |   5 +-
+ packages/core/src/render3/hooks.ts                 | 173 ++++++++++++++++-----
+ packages/core/src/render3/index.ts                 |   2 +
+ packages/core/src/render3/instructions.ts          |  39 ++++-
+ packages/core/src/render3/interfaces/view.ts       |  40 ++++-
+ packages/core/src/render3/jit/environment.ts       |   1 +
+ packages/core/src/render3/state.ts                 |   4 +-
+ packages/core/src/render3/util/view_utils.ts       |  10 +-
+ packages/core/test/acceptance/exports_spec.ts      |  83 +++++++++-
+ packages/core/test/acceptance/lifecycle_spec.ts    | 116 +++++++++++++-
+ .../cyclic_import/bundle.golden_symbols.json       |  11 +-
+ .../hello_world/bundle.golden_symbols.json         |  11 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |  18 ++-
+ packages/core/test/render3/lifecycle_spec.ts       |  42 ++++-
+ .../simpleNgModel/e2e_test/simple_ng_model_spec.ts |  70 ++++-----
+ 24 files changed, 615 insertions(+), 120 deletions(-)
+
+commit dc9f0af08047c1e86e5ba5d274f9651b45b34087
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 22 17:44:58 2019 +0100
+
+    fix(ivy): static host classes and styles should work on root component (#28926)
+    
+    PR Close #28926
+
+ integration/_payload-limits.json                   |  4 +--
+ packages/core/src/render3/component.ts             | 11 +++++--
+ packages/core/test/acceptance/integration_spec.ts  | 14 +++++++++
+ .../hello_world/bundle.golden_symbols.json         | 18 +++++++++++
+ .../material-ci/angular_material_test_blocklist.js | 36 ----------------------
+ 5 files changed, 43 insertions(+), 40 deletions(-)
+
+commit 8f8f9a6e612331b9769e47004c6b65c375eeff6f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Feb 26 18:35:30 2019 +0100
+
+    fix(ivy): ngtsc should correctly bind to context in nested template with many bindings (#28982)
+    
+    PR Close #28982
+
+ .../compliance/r3_view_compiler_template_spec.ts   | 57 ++++++++++++++++++++++
+ packages/compiler/src/render3/view/template.ts     |  3 +-
+ .../material-ci/angular_material_test_blocklist.js | 24 ---------
+ 3 files changed, 59 insertions(+), 25 deletions(-)
+
+commit 9dac04ff50d18ff550a892d5b62aa1f8cd49a45a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 21 16:42:29 2019 +0100
+
+    fix(ivy): ngOnChanges hooks should be inherited from grand-superclasses (#28888)
+    
+    PR Close #28888
+
+ .../render3/features/inherit_definition_feature.ts |   2 -
+ .../acceptance/inherit_definition_feature_spec.ts  | 100 +++++++++++++++++++++
+ .../material-ci/angular_material_test_blocklist.js |  90 +++++++------------
+ tools/material-ci/instructions.md                  |   2 +-
+ 4 files changed, 132 insertions(+), 62 deletions(-)
+
+commit 33f71e8ce33ccbace9c167c811a34ca48e134fbd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 22 16:43:38 2019 +0100
+
+    test(ivy): diagnose root causes of failures in Dialog and MatDialog (#28925)
+    
+    PR Close #28925
+
+ tools/material-ci/angular_material_test_blocklist.js | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit 3c7ce823a3c8809f71667a8849a1f136c824a621
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 15 16:43:48 2019 +0100
+
+    test(ivy): add root cause for failing component-styles docs e2e tests (#28760)
+    
+    PR Close #28760
+
+ aio/tools/examples/run-example-e2e.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1e6ed52cbad3979f594dd43780aeae653befd6d6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 15 12:53:58 2019 +0100
+
+    fix(docs-infra): all examples should get Ivy boilerplate (#28757)
+    
+    PR Close #28757
+
+ aio/tools/examples/example-boilerplate.js | 7 ++++---
+ aio/tools/examples/run-example-e2e.js     | 3 ---
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+
+commit 3842dd6a6d342ce993f418920b9bf87128ae63c1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 13 17:32:54 2019 +0100
+
+    fix(ivy): OnChanges should support updating one Input among many (#28693)
+    
+    PR Close #28693
+
+ aio/tools/examples/run-example-e2e.js              |  3 --
+ .../src/render3/features/ng_onchanges_feature.ts   | 11 +++-
+ packages/core/test/acceptance/lifecycle_spec.ts    | 59 ++++++++++++++++++++++
+ 3 files changed, 69 insertions(+), 4 deletions(-)
+
+commit f8b9e61469953cd4bede741f3caa8af91cd45297
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 13 14:37:43 2019 +0100
+
+    test(ivy): enable more docs examples e2e tests (#28688)
+    
+    PR Close #28688
+
+ aio/tools/examples/run-example-e2e.js | 21 +++++----------------
+ 1 file changed, 5 insertions(+), 16 deletions(-)
+
+commit 94b8aaeba8822b519af02a3aaf38a000b6c1bd5e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 6 15:03:42 2019 +0100
+
+    fix(ivy): ngOnChanges should be inherited from super class (#28563)
+    
+    PR Close #28563
+
+ .../render3/features/inherit_definition_feature.ts |  5 ++
+ packages/core/src/render3/jit/directive.ts         |  4 +-
+ .../acceptance/inherit_definition_feature_spec.ts  | 60 ++++++++++++++++++++++
+ .../render3/inherit_definition_feature_spec.ts     | 40 ---------------
+ .../static/ts/full/e2e_test/static_full_spec.ts    | 47 ++++++++---------
+ .../static/ts/lite/e2e_test/static_lite_spec.ts    | 46 ++++++++---------
+ 6 files changed, 109 insertions(+), 93 deletions(-)
+
+commit f7591f130246c93191c1c0ddae9627cec9011a26
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 8 15:12:39 2019 +0100
+
+    test(ivy): add root cause for failing forms e2e tests (#28620)
+    
+    PR Close #28620
+
+ .../examples/forms/ts/simpleNgModel/e2e_test/simple_ng_model_spec.ts  | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+commit 0e6f799aeccf3b0c0bb1d72e714822b0539bc60b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 6 10:52:18 2019 +0100
+
+    test(ivy): update e2e tests to use Renderer2 instead of Renderer (#28558)
+    
+    PR Close #28558
+
+ .../e2e_test/hello_world/hello_world_spec.ts       | 32 ++++----
+ .../web_workers/kitchen_sink/kitchen_sink_spec.ts  | 96 +++++++++++-----------
+ modules/playground/src/hello_world/index.ts        |  6 +-
+ .../src/web_workers/kitchen_sink/index_common.ts   |  6 +-
+ 4 files changed, 68 insertions(+), 72 deletions(-)
+
+commit 43081a01d8f09def7f465d76a936dcbabf4abc7d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Feb 5 17:14:18 2019 +0100
+
+    fix(ivy): WorkerAppModule should be an APP_ROOT (#28544)
+    
+    PR Close #28544
+
+ .../e2e_test/web_workers/input/input_spec.ts       | 115 +++++++++----------
+ .../web_workers/kitchen_sink/kitchen_sink_spec.ts  |   2 +-
+ .../message_broker/message_broker_spec.ts          |  62 +++++-----
+ .../e2e_test/web_workers/router/router_spec.ts     | 126 ++++++++++-----------
+ .../e2e_test/web_workers/todo/todo_spec.ts         |  30 +++--
+ packages/platform-webworker/src/worker_app.ts      |   3 +-
+ 6 files changed, 165 insertions(+), 173 deletions(-)
+
+commit 2ea4f690e461e2e2813260c3e1fa05ae022afc12
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Feb 5 14:24:19 2019 +0100
+
+    test(ivy): add root cause for failing hello world e2e tests (#28540)
+    
+    PR Close #28540
+
+ .../e2e_test/hello_world/hello_world_spec.ts       | 31 +++++++++++-----------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
+
+commit 9efb39c8a2c39fe7805f480b0890f02c2a57c7b8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 31 10:02:38 2019 +0100
+
+    test(ivy): ComponentFactoryResolver can resolve any component factory in Ivy (#28465)
+    
+    PR Close #28465
+
+ packages/core/test/linker/entry_components_integration_spec.ts | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit d83307adab10ab4477715bc904401fb78bac17e9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 18 17:38:39 2019 +0100
+
+    fix(ivy): init hooks should be called once and only once (#28239)
+    
+    PR Close #28239
+
+ packages/core/src/render3/definition.ts            |   1 +
+ .../src/render3/features/ng_onchanges_feature.ts   |  11 +-
+ packages/core/src/render3/hooks.ts                 |  58 +++++--
+ packages/core/src/render3/instructions.ts          |   9 +-
+ packages/core/src/render3/interfaces/definition.ts |   1 +
+ packages/core/src/render3/interfaces/view.ts       |  48 ++++--
+ packages/core/src/render3/state.ts                 |   7 +-
+ .../linker/change_detection_integration_spec.ts    | 185 ++++++++++-----------
+ .../core/test/render3/change_detection_spec.ts     | 111 +++++++------
+ 9 files changed, 240 insertions(+), 191 deletions(-)
+
+commit 873750609f4c81f14bfe061e0e211ea85daa7eb5
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 18 14:16:41 2019 +0100
+
+    fix(ivy): calling ChangeDetectorRef.detectChanges() from onChanges should not go infinite loop (#28239)
+    
+    PR Close #28239
+
+ packages/core/src/render3/instructions.ts          |  3 ++
+ .../core/test/render3/change_detection_spec.ts     | 60 +++++++++++++++++++++-
+ 2 files changed, 62 insertions(+), 1 deletion(-)
+
+commit fdc2b0bf77132a64ff34d4a5ebe942a789c12c6b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 23 16:58:52 2019 +0100
+
+    fix(ivy): queries should register matches from top to bottom (#28319)
+    
+    PR Close #28319
+
+ packages/core/src/render3/instructions.ts          |  16 ++-
+ .../core/test/linker/query_integration_spec.ts     | 124 +++++++++------------
+ packages/core/test/render3/query_spec.ts           | 120 ++++++++++++++++++++
+ 3 files changed, 188 insertions(+), 72 deletions(-)
+
+commit fa53150692d6c569f4745735569ce246968d9289
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jan 14 10:20:27 2019 +0100
+
+    test(ivy): NodeInjector should know how to get itself (INJECTOR) (#28009)
+    
+    PR Close #28009
+
+ .../bazel/injectable_def/app/test/app_spec.ts      |  1 -
+ packages/core/test/render3/di_spec.ts              | 32 +++++++++++++++++++++-
+ 2 files changed, 31 insertions(+), 2 deletions(-)
+
+commit 76ed13bffe47c325144ee0ece4ca876db8631b54
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 9 17:55:23 2019 +0100
+
+    fix(ivy): directives without selector should not be supported (#28021)
+    
+    PR Close #28021
+
+ .../src/ngtsc/annotations/src/directive.ts         |  3 ++
+ .../test/compliance/r3_compiler_compliance_spec.ts | 54 +++++++++++++++-------
+ packages/compiler/src/render3/view/compiler.ts     |  6 +--
+ packages/core/test/linker/integration_spec.ts      | 24 +++++-----
+ 4 files changed, 55 insertions(+), 32 deletions(-)
+
+commit 5609764886686c5fdbd91f88c477a3e5541b015b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 9 15:45:55 2019 +0100
+
+    test(ivy): add root causes for router TestBed failures (#28014)
+    
+    PR Close #28014
+
+ packages/router/test/integration.spec.ts | 196 +++++++++++++++----------------
+ 1 file changed, 96 insertions(+), 100 deletions(-)
+
+commit c2f19515d6743e360600786b0ce3c5a616a9cabc
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jan 8 16:10:43 2019 +0100
+
+    test(ivy): enable last test in view injector integration spec (#27989)
+    
+    PR Close #27989
+
+ .../test/linker/view_injector_integration_spec.ts  | 77 +++++++++++++---------
+ 1 file changed, 45 insertions(+), 32 deletions(-)
+
+commit e7753131880479f8c084c4233040b1af97e1e5fd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jan 7 17:07:39 2019 +0100
+
+    fix(ivy): ngOnDestroy hooks should be called on providers (#27955)
+    
+    PR Close #27955
+
+ packages/core/src/render3/di.ts                    |  4 +
+ packages/core/src/render3/di_setup.ts              |  5 +-
+ packages/core/src/render3/instructions.ts          |  3 +-
+ packages/core/src/render3/interfaces/injector.ts   |  4 +
+ .../linker/change_detection_integration_spec.ts    | 25 +++---
+ .../test/linker/view_injector_integration_spec.ts  | 49 ++++++------
+ packages/core/test/render3/providers_spec.ts       | 90 ++++++++++++++++++++++
+ 7 files changed, 139 insertions(+), 41 deletions(-)
+
+commit 996435b79a1e43bd79aaab9ada014366e6b03ddd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jan 7 10:38:55 2019 +0100
+
+    refactor(ivy): remove TView.pipeDestroyHooks (#27955)
+    
+    PR Close #27955
+
+ packages/core/src/render3/instructions.ts                   |  1 -
+ packages/core/src/render3/interfaces/view.ts                | 11 -----------
+ packages/core/src/render3/node_manipulation.ts              |  9 ---------
+ packages/core/src/render3/pipe.ts                           |  3 +--
+ packages/core/test/bundling/todo/bundle.golden_symbols.json |  3 ---
+ 5 files changed, 1 insertion(+), 26 deletions(-)
+
+commit 929334b0bf64c225c776d0e4643e9078779ec418
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 3 14:43:06 2019 +0100
+
+    fix(ivy): should not throw when getting VCRef.parentInjector on the root view (#27909)
+    
+    PR Close #27909
+
+ packages/core/src/render3/di.ts                    | 149 +++++++++++----------
+ .../core/src/render3/view_engine_compatibility.ts  |   2 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |   6 -
+ .../test/linker/view_injector_integration_spec.ts  |  85 ++++++------
+ .../core/test/render3/view_container_ref_spec.ts   |  17 +++
+ 5 files changed, 136 insertions(+), 123 deletions(-)
+
+commit fb7816fed45e7263e9055bc0442980dc454c67e0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 4 15:38:40 2019 +0100
+
+    fix(ivy): element injector on the host of a component should see viewProviders of that component (#27928)
+    
+    PR Close #27928
+
+ packages/core/src/render3/di.ts                    |  2 +-
+ .../test/linker/view_injector_integration_spec.ts  | 52 ++++++++++------------
+ packages/core/test/render3/providers_spec.ts       | 24 ++++++++--
+ 3 files changed, 46 insertions(+), 32 deletions(-)
+
+commit 0bd9deb9f516adfd4e8d0bc9dfec52c250a18b81
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 3 15:55:01 2019 +0100
+
+    fix(ivy): pipes should overwrite pipes with later entry in the pipes array (#27910)
+    
+    PR Close #27910
+
+ packages/core/src/render3/pipe.ts                  |  2 +-
+ .../test/linker/view_injector_integration_spec.ts  | 14 ++++----
+ packages/core/test/render3/pipe_spec.ts            | 40 +++++++++++++++++++++-
+ 3 files changed, 46 insertions(+), 10 deletions(-)
+
+commit b7d0ab7de31a353eafdf5ebb362f10841dd39ccd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 3 16:20:40 2019 +0100
+
+    test(ivy): enable more @angular/core tests (#27912)
+    
+    PR Close #27912
+
+ .../test/linker/view_injector_integration_spec.ts  | 83 ++++++++++------------
+ 1 file changed, 37 insertions(+), 46 deletions(-)
+
+commit 460be795cf94995d275bac3a972c686339f7c173
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Dec 21 17:10:18 2018 +0100
+
+    test(ivy): add root cause analysis for failing core tests (view injector integration) (#27912)
+    
+    PR Close #27912
+
+ .../linker/change_detection_integration_spec.ts    |   2 +-
+ .../test/linker/view_injector_integration_spec.ts  | 406 +++++++++++----------
+ 2 files changed, 207 insertions(+), 201 deletions(-)
+
+commit 5da55d62469710a503fb71525ebae0358ee69484
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Dec 21 11:25:55 2018 +0100
+
+    test(ivy): add root cause analysis for failing router tests (#27792)
+    
+    PR Close #27792
+
+ packages/router/test/integration.spec.ts | 98 ++++++++++++++++----------------
+ 1 file changed, 49 insertions(+), 49 deletions(-)
+
+commit 8f8572fd3e3c988ef38e1293cbe7b1403188742e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Dec 13 11:14:33 2018 +0100
+
+    fix(ivy): @Host should behave as in View Engine (#27646)
+    
+    PR Close #27646
+
+ packages/core/src/render3/di.ts                    |  54 +++--
+ packages/core/src/render3/instructions.ts          |   4 +-
+ packages/core/src/render3/interfaces/injector.ts   |   1 -
+ packages/core/src/render3/node_manipulation.ts     |  20 +-
+ packages/core/src/render3/query.ts                 |   5 +-
+ packages/core/src/render3/util.ts                  |  32 ++-
+ .../core/src/render3/view_engine_compatibility.ts  |   4 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |   3 +
+ packages/core/test/linker/integration_spec.ts      |  25 +--
+ .../test/linker/view_injector_integration_spec.ts  |  18 +-
+ packages/core/test/render3/di_spec.ts              | 244 ++++++++++++++++++++-
+ packages/core/test/render3/render_util.ts          |  10 +-
+ 12 files changed, 337 insertions(+), 83 deletions(-)
+
+commit 8042140742708951f118501dc75a51b029513b1f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Dec 13 18:16:03 2018 +0100
+
+    test(ivy): enable more @angular/core tests (#27654)
+    
+    PR Close #27654
+
+ packages/core/src/render3/di.ts                    |   2 +-
+ packages/core/src/render3/util.ts                  |   2 +
+ .../test/linker/view_injector_integration_spec.ts  | 181 ++++++++++++++-------
+ packages/private/testing/src/ivy_test_selectors.ts |  18 ++
+ 4 files changed, 143 insertions(+), 60 deletions(-)
+
+commit f013c57186f58279a1602cca5366612eaeaa2298
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Dec 6 15:28:39 2018 +0100
+
+    test(router): correct a wrong test (FW-766) (#27511)
+    
+    PR Close #27511
+
+ packages/router/test/integration.spec.ts | 82 ++++++++++++++++----------------
+ 1 file changed, 42 insertions(+), 40 deletions(-)
+
+commit 8fa7e93c30517d4f5568e9a3b74844c2ec525d42
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Dec 6 14:59:28 2018 +0100
+
+    test(ivy): enable router tests with pending timers (FW-768) (#27509)
+    
+    PR Close #27509
+
+ packages/router/test/integration.spec.ts | 184 ++++++++++++++++---------------
+ 1 file changed, 94 insertions(+), 90 deletions(-)
+
+commit 8e9858fadb94dee6b2fe0dc0a6121f1515287ef8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Dec 5 17:43:59 2018 +0100
+
+    fix(ivy): align NgModuleRef implementation between Ivy and ViewEngine (#27482)
+    
+    Solves FW-765 and FW-767
+    
+    PR Close #27482
+
+ packages/core/src/render3/component_ref.ts         |  20 +-
+ packages/core/src/render3/ng_module_ref.ts         |  39 ++-
+ .../core/src/render3/view_engine_compatibility.ts  |   2 +-
+ packages/core/test/render3/component_ref_spec.ts   |  82 ++++++
+ packages/router/test/integration.spec.ts           | 305 ++++++++++-----------
+ packages/router/test/router_preloader.spec.ts      | 221 ++++++++-------
+ 6 files changed, 384 insertions(+), 285 deletions(-)
+
+commit 8973f12ee4b1e04118ce2f1a6a48b93a6ff92c4d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Dec 4 14:34:43 2018 +0100
+
+    fix(ivy): provided Injector should be instantiated by its factory (#27456)
+    (FW-777)
+    
+    When an Injector is provided, R3Injector instantiates it by calling its
+    constructor instead of its factory, not resolving dependencies.
+    With this fix, the ngInjectorDef is checked and the factory is correctly
+    used if it is found.
+    
+    PR Close #27456
+
+ packages/core/src/di/r3_injector.ts                | 13 +++-
+ .../hello_world_r2/bundle.golden_symbols.json      |  2 +-
+ .../bundling/injection/bundle.golden_symbols.json  |  2 +-
+ .../bundling/todo_r2/bundle.golden_symbols.json    |  2 +-
+ packages/core/test/di/r3_injector_spec.ts          | 15 ++++
+ packages/router/upgrade/test/upgrade.spec.ts       | 86 +++++++++++-----------
+ 6 files changed, 68 insertions(+), 52 deletions(-)
+
+commit bd864fb27415ee217fcc5d04ff2ba5225faab1f8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Dec 3 11:40:07 2018 +0100
+
+    feat(ivy): support WrappedValue in pipes (FW-726) (#27409)
+    
+    PR Close #27409
+
+ packages/core/src/render3/pipe.ts        |  48 +-
+ packages/core/test/render3/pipe_spec.ts  |  43 +-
+ packages/router/test/integration.spec.ts | 965 +++++++++++++++----------------
+ 3 files changed, 539 insertions(+), 517 deletions(-)
+
+commit 0cf49c8de37cc4d8421f815499ec8a556b679d5c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Dec 3 12:14:54 2018 +0100
+
+    test(ivy): run router/upgrade tests with ivy on CI (#27410)
+    
+    PR Close #27410
+
+ packages/router/upgrade/test/BUILD.bazel     |  4 +-
+ packages/router/upgrade/test/upgrade.spec.ts | 87 +++++++++++++++-------------
+ 2 files changed, 47 insertions(+), 44 deletions(-)
+
+commit 35e02ad5e0c5be3906b71c0693e0dc6cc7ff1769
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Nov 30 18:30:10 2018 +0100
+
+    test(ivy): add root causes for router TestBed failures (#27325)
+    
+    PR Close #27325
+
+ packages/router/test/integration.spec.ts      | 14 ++++++++------
+ packages/router/test/router_preloader.spec.ts |  6 ++++--
+ 2 files changed, 12 insertions(+), 8 deletions(-)
+
+commit a566e52ca43f971ef141ada46a505589734a3a37
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Nov 28 15:10:03 2018 +0100
+
+    test(ivy): run more router tests in CI (#27325)
+    
+    PR Close #27325
+
+ packages/router/test/integration.spec.ts           | 1152 ++++++++++----------
+ .../router/test/regression_integration.spec.ts     |    1 -
+ packages/router/test/router_preloader.spec.ts      |    4 +-
+ 3 files changed, 561 insertions(+), 596 deletions(-)
+
+commit c2f30542e7fa5c01d74df76399556a852a1a6edc
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Nov 22 15:38:28 2018 +0100
+
+    fix(ivy): should support components without selector (#27169)
+    
+    PR Close #27169
+
+ .../src/ngtsc/annotations/src/component.ts         |   8 +-
+ .../src/ngtsc/annotations/src/directive.ts         |   4 +-
+ .../test/compliance/r3_compiler_compliance_spec.ts |  56 ++
+ packages/compiler/src/core.ts                      |   5 +-
+ packages/compiler/src/jit_compiler_facade.ts       |   3 +
+ packages/compiler/src/render3/view/compiler.ts     |   4 +-
+ packages/core/src/render3/node_selector_matcher.ts |   2 +-
+ .../test/render3/node_selector_matcher_spec.ts     |   3 +
+ packages/router/test/integration.spec.ts           | 685 ++++++++++-----------
+ .../router/test/regression_integration.spec.ts     | 152 +++--
+ 10 files changed, 482 insertions(+), 440 deletions(-)
+
+commit 8ce59a583b7041841e6a3a49ebdb23eff06c9cdd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Nov 20 17:02:35 2018 +0100
+
+    test(ivy): run router tests with ivy on CI (#27195)
+    
+    PR Close #27195
+
+ packages/router/karma-test-shim.js                 |    1 +
+ packages/router/karma.conf.js                      |    2 +
+ packages/router/test/BUILD.bazel                   |    7 +-
+ packages/router/test/integration.spec.ts           | 3724 ++++++++++----------
+ .../test/operators/prioritized_guard_value.spec.ts |    2 +-
+ .../router/test/regression_integration.spec.ts     |  154 +-
+ packages/router/test/router.spec.ts                |    2 +-
+ packages/router/test/router_preloader.spec.ts      |  293 +-
+ .../test/spy_ng_module_factory_loader.spec.ts      |    2 +-
+ 9 files changed, 2151 insertions(+), 2036 deletions(-)
+
+commit 848f4148c0a3e6df90dea8d4369cc42788e30aa6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Nov 16 15:25:38 2018 +0100
+
+    fix(ivy): DI should  work when no element injector on starting node (#27133)
+    
+    PR Close #27133
+
+ packages/core/src/render3/di.ts              |  5 +-
+ packages/core/test/render3/providers_spec.ts | 69 ++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+), 2 deletions(-)
+
+commit 1c9e526a839788ed650bf85288f6e4fa5fdd143a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Nov 14 17:04:22 2018 +0100
+
+    fix(ivy): use the root view injector when resolving dependencies (#27090)
+    
+    PR Close #27090
+
+ packages/core/src/render3/component_ref.ts         |  21 +++-
+ packages/core/src/render3/util.ts                  |   5 +-
+ .../core/src/render3/view_engine_compatibility.ts  |   4 +-
+ .../hello_world_r2/bundle.golden_symbols.json      |   6 +
+ .../bundling/todo_r2/bundle.golden_symbols.json    |   6 +
+ packages/core/test/render3/providers_spec.ts       | 139 ++++++++++++++++++++-
+ .../core/test/render3/view_container_ref_spec.ts   |  64 +++++++---
+ 7 files changed, 220 insertions(+), 25 deletions(-)
+
+commit 297c54ebb3060742e3f07aa57814288cef2e64c6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Oct 26 12:27:40 2018 +0200
+
+    fix(ivy): support env where requestAnimationFrame is not available (#26779)
+    
+    PR Close #26779
+
+ packages/core/src/render3/component.ts                 | 17 ++++++++---------
+ packages/core/src/render3/component_ref.ts             | 15 +++++----------
+ packages/core/src/render3/instructions.ts              |  2 +-
+ packages/core/src/render3/util.ts                      | 11 ++++++++++-
+ .../animation_world/bundle.golden_symbols.json         |  3 +++
+ .../bundling/hello_world/bundle.golden_symbols.json    | 18 ++++++++++++++++++
+ .../bundling/hello_world_r2/bundle.golden_symbols.json |  9 +++++++++
+ .../core/test/bundling/todo/bundle.golden_symbols.json |  3 +++
+ .../test/bundling/todo_r2/bundle.golden_symbols.json   |  3 +++
+ 9 files changed, 60 insertions(+), 21 deletions(-)
+
+commit b0476f308b5a33ee1e6479e2c602c7b01689420f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Oct 18 09:23:18 2018 +0200
+
+    feat(ivy): support providers and viewProviders (#25803)
+    
+    PR Close #25803
+
+ .../src/ngcc/test/rendering/renderer_spec.ts       |    2 +-
+ .../src/ngtsc/annotations/src/component.ts         |    5 +
+ .../src/ngtsc/annotations/src/directive.ts         |    5 +-
+ .../test/compliance/r3_compiler_compliance_spec.ts |   65 +-
+ .../compliance/r3_view_compiler_directives_spec.ts |    2 -
+ .../compliance/r3_view_compiler_listener_spec.ts   |    1 -
+ .../compliance/r3_view_compiler_providers_spec.ts  |  152 +++
+ .../compliance/r3_view_compiler_styling_spec.ts    |    6 -
+ packages/compiler/src/render3/r3_identifiers.ts    |    2 +-
+ packages/compiler/src/render3/view/api.ts          |   10 +
+ packages/compiler/src/render3/view/compiler.ts     |   41 +-
+ packages/core/src/core_render3_private_export.ts   |    2 +-
+ packages/core/src/di/forward_ref.ts                |   12 +-
+ packages/core/src/di/injector.ts                   |   57 +-
+ packages/core/src/di/r3_injector.ts                |   33 +-
+ packages/core/src/render3/component.ts             |   22 +-
+ packages/core/src/render3/component_ref.ts         |   22 +-
+ packages/core/src/render3/definition.ts            |   29 +-
+ packages/core/src/render3/di.ts                    |  504 ++++----
+ packages/core/src/render3/di_setup.ts              |  260 ++++
+ packages/core/src/render3/discovery_utils.ts       |    3 +-
+ .../render3/features/inherit_definition_feature.ts |    6 +-
+ .../core/src/render3/features/providers_feature.ts |   45 +
+ .../core/src/render3/features/public_feature.ts    |   19 -
+ packages/core/src/render3/i18n.ts                  |   25 +-
+ packages/core/src/render3/index.ts                 |   23 +-
+ packages/core/src/render3/instructions.ts          | 1270 +++++++++-----------
+ packages/core/src/render3/interfaces/definition.ts |   35 +-
+ packages/core/src/render3/interfaces/injector.ts   |  156 ++-
+ packages/core/src/render3/interfaces/node.ts       |   20 +
+ packages/core/src/render3/interfaces/view.ts       |   27 +-
+ packages/core/src/render3/jit/directive.ts         |    3 +
+ packages/core/src/render3/jit/environment.ts       |    2 +-
+ packages/core/src/render3/pipe.ts                  |    5 +-
+ packages/core/src/render3/pure_function.ts         |    4 +-
+ packages/core/src/render3/query.ts                 |    7 +-
+ packages/core/src/render3/state.ts                 |  432 +++++++
+ packages/core/src/render3/util.ts                  |   80 +-
+ .../core/src/render3/view_engine_compatibility.ts  |   39 +-
+ packages/core/src/render3/view_ref.ts              |    3 +-
+ packages/core/src/sanitization/sanitization.ts     |    2 +-
+ .../animation_world/bundle.golden_symbols.json     |  166 ++-
+ .../hello_world/bundle.golden_symbols.json         |  104 +-
+ .../hello_world_r2/bundle.golden_symbols.json      |    9 +
+ .../bundling/injection/bundle.golden_symbols.json  |   16 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |  161 ++-
+ .../bundling/todo_r2/bundle.golden_symbols.json    |  181 ++-
+ .../render3/Inherit_definition_feature_spec.ts     |    2 +-
+ .../core/test/render3/change_detection_spec.ts     |    3 +-
+ .../core/test/render3/common_integration_spec.ts   |    3 +-
+ .../component_directives_spec.ts                   |   54 +-
+ .../compiler_canonical/content_projection_spec.ts  |    6 +-
+ .../render3/compiler_canonical/elements_spec.ts    |   22 +-
+ .../test/render3/compiler_canonical/i18n_spec.ts   |    8 +-
+ .../render3/compiler_canonical/injection_spec.ts   |   20 +-
+ .../render3/compiler_canonical/life_cycle_spec.ts  |    6 +-
+ .../compiler_canonical/local_reference_spec.ts     |    4 +-
+ .../render3/compiler_canonical/ng_module_spec.ts   |   12 +-
+ .../test/render3/compiler_canonical/pipes_spec.ts  |   16 +-
+ .../test/render3/compiler_canonical/query_spec.ts  |   17 +-
+ .../render3/compiler_canonical/sanitize_spec.ts    |    2 +-
+ .../render3/compiler_canonical/small_app_spec.ts   |    8 +-
+ .../compiler_canonical/template_variables_spec.ts  |    8 +-
+ packages/core/test/render3/component_spec.ts       | 1143 +++++++++++++++++-
+ packages/core/test/render3/di_spec.ts              |  141 +--
+ packages/core/test/render3/discovery_utils_spec.ts |    8 +-
+ packages/core/test/render3/integration_spec.ts     |    4 +-
+ packages/core/test/render3/ivy/jit_spec.ts         |    2 +-
+ .../test/render3/ng_on_changes_feature_spec.ts     |   14 +-
+ .../test/render3/node_selector_matcher_spec.ts     |    5 +-
+ packages/core/test/render3/pipe_spec.ts            |    3 +-
+ packages/core/test/render3/properties_spec.ts      |   14 +-
+ packages/core/test/render3/query_spec.ts           |  109 +-
+ packages/core/test/render3/render_util.ts          |    9 +-
+ .../core/test/render3/view_container_ref_spec.ts   |    3 +-
+ tools/public_api_guard/core/core.d.ts              |    2 +-
+ 76 files changed, 4088 insertions(+), 1635 deletions(-)
+
+commit 00f13110bef435a2048c9d89527c63ece5b97d46
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 16 17:43:29 2018 +0200
+
+    feat(ivy): support injecting Renderer2 (#25523)
+    
+    PR Close #25523
+
+ .../compiler-cli/src/ngtsc/annotations/src/util.ts |  3 ++
+ .../compiler-cli/test/ngtsc/fake_core/index.ts     |  1 +
+ packages/compiler-cli/test/ngtsc/ngtsc_spec.ts     |  4 ++-
+ packages/compiler/src/identifiers.ts               |  1 +
+ packages/compiler/src/render3/r3_factory.ts        | 10 ++++++
+ packages/compiler/src/render3/r3_identifiers.ts    |  2 ++
+ packages/core/src/core_render3_private_export.ts   |  1 +
+ packages/core/src/render3/STATUS.md                |  1 +
+ packages/core/src/render3/di.ts                    | 21 +++++++++++-
+ packages/core/src/render3/index.ts                 |  2 +-
+ packages/core/src/render3/jit/environment.ts       |  1 +
+ .../test/bundling/todo/bundle.golden_symbols.json  |  6 ++++
+ .../bundling/todo_r2/bundle.golden_symbols.json    |  6 ++++
+ packages/core/test/render3/di_spec.ts              | 37 ++++++++++++++++++++--
+ .../src/compiler_reflector.ts                      |  3 +-
+ 15 files changed, 93 insertions(+), 6 deletions(-)
+
+commit 61769748325fdc451532473b29343b30ec37faaf
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 21 19:09:23 2018 +0200
+
+    test(compiler-cli): fix failing test after bad merge (#25599)
+    
+    PR Close #25599
+
+ packages/compiler-cli/test/compliance/r3_view_compiler_template_spec.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e3834b7001a416bd66ed4bccf2b1f256459915c7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jul 25 11:07:54 2018 +0200
+
+    feat(ivy): support change detection on the root view (#25085)
+    
+    PR Close #25085
+
+ packages/core/src/render3/component_ref.ts         | 13 ++---------
+ packages/core/src/render3/instructions.ts          | 27 ++++++++++++++++++++++
+ packages/core/src/render3/view_ref.ts              | 11 ++++++++-
+ .../core/test/application_ref_integration_spec.ts  |  7 +++---
+ 4 files changed, 42 insertions(+), 16 deletions(-)
+
+commit cd89eb840434812fa6207c148663021979e183dd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jul 25 18:11:39 2018 +0200
+
+    feat(ivy): implement the getters of ViewContainerRef (#25174)
+    
+    BREAKING CHANGE: ViewContainerRef.parentInjector is deprecated without replacement
+    
+    PR Close #25174
+
+ packages/core/src/linker/view_container_ref.ts     |  1 +
+ packages/core/src/render3/di.ts                    | 53 ++++++++++++++----
+ packages/core/src/render3/instructions.ts          |  2 +-
+ packages/core/src/view/refs.ts                     |  1 +
+ .../test/bundling/todo/bundle.golden_symbols.json  | 27 ++++++++++
+ .../core/test/render3/view_container_ref_spec.ts   | 62 +++++++++++++++++++++-
+ tools/public_api_guard/core/core.d.ts              |  2 +-
+ 7 files changed, 134 insertions(+), 14 deletions(-)
+
+commit 445b9a5627fb5584bff6be0b133a49bdd065f517
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jul 20 14:32:23 2018 +0200
+
+    feat(ivy): support ViewContainerRef.createComponent() (#24997)
+    
+    PR Close #24997
+
+ packages/core/src/render3/STATUS.md                |   2 +-
+ packages/core/src/render3/component_ref.ts         |  73 ++++-
+ packages/core/src/render3/di.ts                    |  44 ++-
+ packages/core/src/render3/index.ts                 |   2 +-
+ packages/core/src/render3/instructions.ts          |  75 +++--
+ packages/core/src/render3/view_ref.ts              |  44 +--
+ .../hello_world/bundle.golden_symbols.json         |  15 +
+ .../test/bundling/todo/bundle.golden_symbols.json  |  23 +-
+ .../core/test/render3/view_container_ref_spec.ts   | 339 ++++++++++++++++++---
+ 9 files changed, 484 insertions(+), 133 deletions(-)
+
+commit f229449c67709bb684b47e9d142ae5916b65fcde
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jun 22 15:37:38 2018 +0200
+
+    refactor(ivy): insert embedded views immediately (#24629)
+    
+    PR Close #24629
+
+ packages/core/src/render3/di.ts                    |  34 ++++---
+ packages/core/src/render3/i18n.ts                  |   2 +
+ packages/core/src/render3/instructions.ts          |  97 ++++++++++++--------
+ packages/core/src/render3/node_manipulation.ts     | 102 ++++++++++++++-------
+ .../hello_world/bundle.golden_symbols.json         |   6 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |   6 ++
+ .../core/test/render3/view_container_ref_spec.ts   |   7 +-
+ 7 files changed, 172 insertions(+), 82 deletions(-)
+
+commit 8b8168262de854a875ccedffd504df2f12a6dca0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jun 18 18:07:05 2018 +0200
+
+    fix(ivy): nested ngFor should be supported (#24564)
+    
+    PR Close #24564
+
+ packages/core/src/render3/di.ts                    |  5 +-
+ packages/core/src/render3/instructions.ts          |  3 +-
+ packages/core/src/render3/interfaces/node.ts       |  7 ++
+ packages/core/src/render3/node_manipulation.ts     |  5 +-
+ .../core/test/render3/common_integration_spec.ts   | 77 ++++++++++++++++++++++
+ 5 files changed, 94 insertions(+), 3 deletions(-)
+
+commit e3c54e4465e7387ec103f43a2cc615f088d163f2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jun 6 17:30:48 2018 +0200
+
+    refactor(ivy): use comment nodes to mark view containers (#24346)
+    
+    PR Close #24346
+
+ packages/core/src/render3/STATUS.md                |   2 +-
+ packages/core/src/render3/di.ts                    |  14 +-
+ packages/core/src/render3/instructions.ts          |  22 +--
+ packages/core/src/render3/interfaces/node.ts       |  16 +-
+ packages/core/src/render3/interfaces/renderer.ts   |   4 +
+ packages/core/src/render3/node_manipulation.ts     | 211 ++++++++-------------
+ .../test/bundling/todo/bundle.golden_symbols.json  |  12 +-
+ packages/core/test/render3/control_flow_spec.ts    |  72 ++++++-
+ packages/core/test/render3/query_spec.ts           |   5 +-
+ packages/core/test/render3/render_util.ts          |   9 +-
+ .../core/test/render3/view_container_ref_spec.ts   |   2 +-
+ 11 files changed, 191 insertions(+), 178 deletions(-)
+
+commit b750919ce05c152321a41a5e89761f723f3ffc47
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 31 15:45:46 2018 +0200
+
+    feat(ivy): implement ViewContainerRef.remove (#24221)
+    
+    PR Close #24221
+
+ packages/core/src/render3/STATUS.md                |  35 ++---
+ packages/core/src/render3/component.ts             |   4 +-
+ packages/core/src/render3/di.ts                    |  24 ++--
+ packages/core/src/render3/instructions.ts          |  17 ++-
+ packages/core/src/render3/interfaces/view.ts       |  13 +-
+ packages/core/src/render3/node_manipulation.ts     | 157 ++++++++++++++-------
+ packages/core/src/render3/query.ts                 |   4 +-
+ packages/core/src/render3/view_ref.ts              |  64 +++------
+ .../test/bundling/todo/bundle.golden_symbols.json  |  15 +-
+ packages/core/test/render3/imported_renderer2.ts   |  10 +-
+ packages/core/test/render3/query_list_spec.ts      |   8 ++
+ packages/core/test/render3/query_spec.ts           |  57 +++++++-
+ .../core/test/render3/renderer_factory_spec.ts     |   6 -
+ .../core/test/render3/view_container_ref_spec.ts   | 115 +++++++++++++--
+ 14 files changed, 374 insertions(+), 155 deletions(-)
+
+commit 42a7295203f887e28f4c847b817467b2b3830205
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 17 16:19:44 2018 +0200
+
+    refactor(ivy): remove dynamicViewCount from LContainer (#23963)
+    
+    PR Close #23963
+
+ packages/core/src/render3/di.ts                    | 15 +---------
+ packages/core/src/render3/instructions.ts          | 34 +++++++++++++++-------
+ packages/core/src/render3/interfaces/container.ts  | 11 +++----
+ packages/core/src/render3/interfaces/view.ts       |  8 -----
+ .../hello_world/bundle.golden_symbols.json         |  3 ++
+ .../test/bundling/todo/bundle.golden_symbols.json  |  3 ++
+ 6 files changed, 35 insertions(+), 39 deletions(-)
+
+commit 2e21690c664a6c038c0e26638e37b2a610513011
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue May 22 17:40:59 2018 +0200
+
+    feat(ivy): support renderer.destroy and renderer.destroyNode hooks (#24049)
+    
+    PR Close #24049
+
+ packages/core/src/render3/STATUS.md                |  33 +++++-
+ packages/core/src/render3/ng_dev_mode.ts           |   4 +
+ packages/core/src/render3/node_manipulation.ts     |  18 +++-
+ packages/core/test/render3/render_util.ts          |   8 +-
+ .../core/test/render3/renderer_factory_spec.ts     | 111 ++++++++++++++++++++-
+ 5 files changed, 162 insertions(+), 12 deletions(-)
+
+commit 1a44a0b4a87767236f6eea07deca5e4d8789572f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 12 13:49:37 2018 +0200
+
+    feat(ivy): support lifecycle hooks of ViewContainerRef (#23396)
+    
+    PR Close #23396
+
+ packages/core/src/render3/instructions.ts          |  65 +++++++----
+ .../hello_world/bundle.golden_symbols.json         |   4 +-
+ .../test/bundling/todo/bundle.golden_symbols.json  |   4 +-
+ packages/core/test/render3/lifecycle_spec.ts       |  88 +++++++++++++++
+ .../core/test/render3/view_container_ref_spec.ts   | 123 ++++++++++++++++++++-
+ 5 files changed, 256 insertions(+), 28 deletions(-)
+
+commit e7ef02722d0d39d0825cf64d4e15d964d8704b3a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Apr 11 14:15:30 2018 +0200
+
+    fix(ivy): local directives and pipes should be applied to TemplateRef (#23312)
+    
+    PR Close #23312
+
+ packages/core/src/render3/di.ts                    | 12 ++-
+ packages/core/src/render3/instructions.ts          | 13 ++--
+ .../core/test/render3/view_container_ref_spec.ts   | 88 +++++++++++++++++++++-
+ 3 files changed, 99 insertions(+), 14 deletions(-)
+
+commit 2bb783824efa71fa32d7a5af535ce61b8d371600
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 12 12:13:39 2018 +0200
+
+    fix(ivy): support ViewContainerRef on nodes projected into an embedded view (#23333)
+    
+    PR Close #23333
+
+ packages/core/src/render3/instructions.ts          | 29 ++++++++
+ .../core/test/render3/view_container_ref_spec.ts   | 82 +++++++++++++++++++++-
+ 2 files changed, 110 insertions(+), 1 deletion(-)
+
+commit c973830d9a403dc3a8886fa2c35fe8d4d0831703
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Apr 10 17:37:11 2018 +0200
+
+    refactor(ivy): clean projection support (#23287)
+    
+    PR Close #23287
+
+ packages/core/src/render3/instructions.ts          |   4 +-
+ packages/core/src/render3/node_manipulation.ts     |   8 +-
+ .../core/test/render3/view_container_ref_spec.ts   | 208 +++++++++++----------
+ 3 files changed, 114 insertions(+), 106 deletions(-)
+
+commit bb3f0e5ed217a7a3a427777dbdd3afaf1268691f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Apr 9 17:35:50 2018 +0200
+
+    feat(ivy): support projection of ViewContainerRef (#23272)
+    
+    PR Close #23272
+
+ packages/core/src/render3/node_manipulation.ts     |   3 +
+ .../core/test/render3/view_container_ref_spec.ts   | 220 +++++++++++++++++++--
+ 2 files changed, 205 insertions(+), 18 deletions(-)
+
+commit f4c56f49310b2115c566441d72923b612d8abcc2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 5 10:29:47 2018 +0200
+
+    feat(ivy): implement some of the ViewContainerRef API (#23189)
+    
+    PR Close #23189
+
+ packages/core/src/render3/assert.ts                |   6 +
+ packages/core/src/render3/di.ts                    |  43 +-
+ packages/core/src/render3/node_manipulation.ts     |   1 +
+ packages/core/test/render3/render_util.ts          |  13 +-
+ .../core/test/render3/view_container_ref_spec.ts   | 653 ++++++++++++---------
+ 5 files changed, 426 insertions(+), 290 deletions(-)
+
+commit f95730b8e273c525ed3f536acac2920e6740e723
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Mar 9 18:32:32 2018 +0100
+
+    fix(ivy): elements properties should not be stringified (#22683)
+    
+    PR Close #22683
+
+ packages/core/src/render3/instructions.ts                      |  4 +++-
+ packages/core/test/render3/compiler_canonical/sanitize_spec.ts |  5 ++++-
+ packages/core/test/render3/instructions_spec.ts                | 10 +++++++++-
+ 3 files changed, 16 insertions(+), 3 deletions(-)
+
+commit f64ee154875d2275076582d0233199125ab0e263
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 16 16:23:27 2018 +0100
+
+    feat(ivy): implement pipes (#22254)
+    
+    PR Close #22254
+
+ packages/core/src/render3/definition.ts            |   9 +-
+ packages/core/src/render3/instructions.ts          |   8 +-
+ packages/core/src/render3/interfaces/definition.ts |   2 +-
+ packages/core/src/render3/interfaces/view.ts       |   8 +-
+ packages/core/src/render3/pipe.ts                  |  47 ++-
+ packages/core/src/render3/pure_function.ts         |  63 ++--
+ .../test/render3/compiler_canonical/pipes_spec.ts  | 168 +++++++--
+ packages/core/test/render3/imported_renderer2.ts   |  56 +++
+ packages/core/test/render3/pipe_spec.ts            | 401 +++++++++++++++++++++
+ 9 files changed, 695 insertions(+), 67 deletions(-)
+
+commit 5d4fa7f0c82910b717652b558004035a0fcac37a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 23 15:53:55 2018 +0100
+
+    test(ivy): add canonical examples of bindings on elements (#22403)
+    
+    PR Close #22403
+
+ packages/core/src/core_render3_private_export.ts   |   1 +
+ .../render3/compiler_canonical/elements_spec.ts    | 176 +++++++++++++++++++++
+ 2 files changed, 177 insertions(+)
+
+commit aad431642a6bf81b499a500bc38d45c5f3081998
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 23 11:02:38 2018 +0100
+
+    refactor(ivy): rename componentRefresh to directiveRefresh (#22395)
+    
+    PR Close #22395
+
+ packages/core/src/render3/index.ts                 |   2 +-
+ packages/core/src/render3/instructions.ts          |   9 +-
+ .../core/test/render3/common_integration_spec.ts   |   4 +-
+ packages/core/test/render3/component_spec.ts       |  10 +-
+ packages/core/test/render3/content_spec.ts         |  52 ++---
+ packages/core/test/render3/directive_spec.ts       |   4 +-
+ packages/core/test/render3/integration_spec.ts     |  20 +-
+ packages/core/test/render3/lifecycle_spec.ts       | 248 ++++++++++-----------
+ packages/core/test/render3/listeners_spec.ts       |   8 +-
+ packages/core/test/render3/outputs_spec.ts         |  22 +-
+ packages/core/test/render3/properties_spec.ts      |   6 +-
+ packages/core/test/render3/pure_function_spec.ts   |  34 +--
+ .../core/test/render3/renderer_factory_spec.ts     |   4 +-
+ .../core/test/render3/view_container_ref_spec.ts   |   4 +-
+ 14 files changed, 214 insertions(+), 213 deletions(-)
+
+commit 7effb0016cefd6c18320068eb95bffecb7012493
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 21 18:12:02 2018 +0100
+
+    fix(ivy): ngOnChanges to receive SimpleChanges with non minified property names as keys (#22352)
+    
+    PR Close #22352
+
+ packages/core/src/render3/definition.ts            |   5 +-
+ packages/core/src/render3/interfaces/definition.ts |  23 +-
+ .../compiler_canonical/compiler_canonical_spec.ts  |   1 +
+ packages/core/test/render3/lifecycle_spec.ts       | 474 ++++++++++++++++++++-
+ 4 files changed, 475 insertions(+), 28 deletions(-)
+
+commit b3ffeaa22bed7679374203fcd4a178b6d0cb13db
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 21 15:08:18 2018 +0100
+
+    fix(ivy): OnDestroy hook should not be called twice for a directive on an element (#22350)
+    
+    PR Close #22350
+
+ packages/core/src/render3/node_manipulation.ts |   4 +-
+ packages/core/test/render3/lifecycle_spec.ts   | 150 ++++++++++++++++++++++++-
+ 2 files changed, 147 insertions(+), 7 deletions(-)
+
+commit 894b098eb3f5fb9d9f234059daf6647a9ac01018
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 22 11:58:29 2018 +0100
+
+    test(ivy): add missing tests on directive lifecycle hooks (#22368)
+    
+    PR Close #22368
+
+ packages/core/test/render3/lifecycle_spec.ts | 108 ++++++++++++++++++++-------
+ 1 file changed, 83 insertions(+), 25 deletions(-)
+
+commit ee60bb5b360fbaa974be02a368c6d9fd932ae54f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Feb 19 15:00:34 2018 +0100
+
+    fix(ivy): pureFunction8 should update the right bindings (#22313)
+    
+    PR Close #22313
+
+ packages/core/src/render3/pure_function.ts       | 2 +-
+ packages/core/test/render3/pure_function_spec.ts | 8 ++++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+commit dfa2fb95d5b04f0edd109819369f26d1c85384ae
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 16 17:06:30 2018 +0100
+
+    test(ivy): clean the imported renderer2 (#22255)
+    
+    PR Close #22255
+
+ packages/core/test/render3/imported_renderer2.ts | 34 +++++-------------------
+ 1 file changed, 7 insertions(+), 27 deletions(-)
+
+commit 2de0d4c1db9da5d969b5cf340fad53de70c8975f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 9 14:45:31 2018 +0100
+
+    perf(ivy): use official build optimizer rollup plugin in int test (#22121)
+    
+    PR Close #22121
+
+ integration/_payload-limits.json                   |  2 +-
+ .../hello_world__render3__rollup/package.json      |  2 +-
+ .../hello_world__render3__rollup/rollup.config.js  |  6 ++--
+ integration/hello_world__render3__rollup/yarn.lock | 34 ++++++++--------------
+ 4 files changed, 18 insertions(+), 26 deletions(-)
+
+commit 7e51e52f551f27d29051063f3a5aaf68343abfd4
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Feb 2 11:09:42 2018 +0100
+
+    perf(ivy): improve Uglify configuration in hello world integration test (#21985)
+    
+    PR Close #21985
+
+ integration/_payload-limits.json                   |  4 +-
+ .../hello_world__render3__rollup/package.json      |  8 +-
+ .../hello_world__render3__rollup/rollup.config.js  | 15 ++--
+ integration/hello_world__render3__rollup/yarn.lock | 89 +++++++---------------
+ 4 files changed, 44 insertions(+), 72 deletions(-)
+
+commit dd48df105b69f1bb4814ec7065f2b85e234ad50f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 24 11:56:14 2018 +0100
+
+    perf(ivy): use buildOptimizer in hello_world__render3__rollup integration test (#21744)
+    
+    PR Close #21744
+
+ integration/_payload-limits.json                   |    2 +-
+ .../hello_world__render3__closure/yarn.lock        | 2344 ++++++++++++++++++
+ .../hello_world__render3__rollup/package.json      |    5 +-
+ .../hello_world__render3__rollup/rollup.config.js  |   21 +-
+ .../hello_world__render3__rollup/tsconfig.json     |   16 +-
+ integration/hello_world__render3__rollup/yarn.lock | 2486 ++++++++++++++++++++
+ 6 files changed, 4844 insertions(+), 30 deletions(-)
+
+commit 0b38a039d0565cfc7beb010a87f897bece0cffde
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 12 14:59:50 2018 +0100
+
+    perf(ivy): add a proper creationOnly scenario to the tree benchmark (#21503)
+    
+    PR Close #21503
+
+ modules/benchmarks/e2e_test/tree_perf.ts | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit a0dc0a2f467ebaade08a10afa0e70131c6d40719
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jan 16 17:17:47 2018 +0100
+
+    test(ivy): add render3 integration tests (#21557)
+    
+    PR Close #21557
+
+ integration/_payload-limits.json                   | 14 ++++++++
+ .../clean_ngDevMode.sh                             |  6 ++++
+ .../hello_world__render3__closure/closure.conf     | 22 ++++++++++++
+ .../e2e/app.e2e-spec.ts                            | 12 +++++++
+ .../e2e/browser.config.json                        | 15 ++++++++
+ .../e2e/protractor.config.js                       | 15 ++++++++
+ .../e2e/tsconfig.json                              |  8 +++++
+ .../hello_world__render3__closure/package.json     | 24 +++++++++++++
+ .../hello_world__render3__closure/src/index.html   | 17 +++++++++
+ .../hello_world__render3__closure/src/index.ts     | 37 +++++++++++++++++++
+ .../hello_world__render3__closure/tsconfig.json    | 25 +++++++++++++
+ .../e2e/app.e2e-spec.ts                            | 12 +++++++
+ .../e2e/browser.config.json                        | 15 ++++++++
+ .../e2e/protractor.config.js                       | 15 ++++++++
+ .../hello_world__render3__rollup/e2e/tsconfig.json |  8 +++++
+ .../hello_world__render3__rollup/package.json      | 37 +++++++++++++++++++
+ .../hello_world__render3__rollup/rollup.config.js  | 41 ++++++++++++++++++++++
+ .../hello_world__render3__rollup/src/index.html    | 17 +++++++++
+ .../hello_world__render3__rollup/src/index.ts      | 37 +++++++++++++++++++
+ .../hello_world__render3__rollup/tsconfig.json     | 29 +++++++++++++++
+ integration/run_tests.sh                           |  2 +-
+ packages/core/src/core_render3_private_export.ts   |  1 +
+ 22 files changed, 408 insertions(+), 1 deletion(-)
+
+commit 6397062e2225ef02fb9fac24186875a0c1aaf022
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 12 14:17:44 2018 +0100
+
+    perf(ivy): set ngDevMode to false in render3 benchmarks (#21502)
+    
+    PR Close #21502
+
+ modules/benchmarks/src/largetable/render3/index.html    | 2 ++
+ modules/benchmarks/src/tree/render3/index.html          | 2 ++
+ modules/benchmarks/src/tree/render3_function/index.html | 2 ++
+ 3 files changed, 6 insertions(+)
+
+commit 9b84a325ff2907e8b5848794326e7957532bf6cf
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 11 18:46:11 2018 +0100
+
+    fix(benchpress): should still support selenium_webdriver < 3.6.0 (#21477)
+    
+    PR Close #21477
+
+ packages/benchpress/src/webdriver/selenium_webdriver_adapter.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit db55e86e91fce79a49950bfef0d00eb24315f057
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 3 14:05:33 2018 +0100
+
+    fix(core): make all render3 tests pass in IE9 (#21279)
+    
+    PR Close #21279
+
+ packages/core/src/render3/instructions.ts             | 5 +++--
+ packages/platform-browser/testing/src/browser_util.ts | 5 +++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+commit a2f3f4550d6e87e64987ba27b961c8d39f25899b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 3 11:42:48 2018 +0100
+
+    test(core): properly stringify HTML elements in render3 tests (#21279)
+    
+    PR Close #21279
+
+ packages/core/test/render3/BUILD.bazel              |  3 +++
+ packages/core/test/render3/component_spec.ts        | 14 +++++++-------
+ packages/core/test/render3/exports_spec.ts          |  2 +-
+ packages/core/test/render3/integration_spec.ts      |  2 +-
+ packages/core/test/render3/load_domino.ts           |  9 ++++++---
+ packages/core/test/render3/properties_spec.ts       |  4 ++--
+ packages/core/test/render3/render_util.ts           |  7 ++++++-
+ packages/core/test/render3/renderer_factory_spec.ts |  6 +++---
+ 8 files changed, 29 insertions(+), 18 deletions(-)
+
+commit d2cfc6a719c4470457259a5eb979f16a7bef67ba
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 3 10:45:09 2018 +0100
+
+    build: activate render3 tests in CI (#21279)
+    
+    PR Close #21279
+
+ karma-js.conf.js                                    |  1 -
+ packages/core/src/render3/instructions.ts           | 10 ++++++++++
+ packages/core/test/render3/component_spec.ts        | 14 +++++++-------
+ packages/core/test/render3/render_util.ts           |  5 ++++-
+ packages/core/test/render3/renderer_factory_spec.ts |  6 +++---
+ 5 files changed, 24 insertions(+), 12 deletions(-)
+
+commit 764fea1344cab6bd1e69dbb53a09c0c026532f0d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Dec 15 17:50:54 2017 +0100
+
+    test(core): animation renderer factory in render3 (#20855)
+    
+    PR Close #20855
+
+ packages/core/test/render3/BUILD.bazel             |   4 +
+ packages/core/test/render3/component_spec.ts       |   2 +-
+ packages/core/test/render3/imported_renderer2.ts   |  12 +++
+ packages/core/test/render3/load_domino.ts          |  10 +-
+ packages/core/test/render3/render_util.ts          |   4 +
+ .../core/test/render3/renderer_factory_spec.ts     | 108 ++++++++++++++++++++-
+ 6 files changed, 133 insertions(+), 7 deletions(-)
+
+commit d1de587ce0209a093346e7d8d20a68204815d154
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Dec 11 16:30:46 2017 +0100
+
+    feat(core): add renderer factory in render3 (#20855)
+    
+    PR Close #20855
+
+ modules/benchmarks/src/largetable/iv/largetable.js |   4 +-
+ modules/benchmarks/src/largetable/render3/index.ts |   2 +-
+ modules/benchmarks/src/largetable/render3/table.ts |  10 +-
+ modules/benchmarks/src/tree/render3/index.ts       |   2 +-
+ modules/benchmarks/src/tree/render3/tree.ts        |  18 ++--
+ .../benchmarks/src/tree/render3_function/index.ts  |   2 +-
+ packages/core/src/render3/component.ts             |  28 ++---
+ packages/core/src/render3/instructions.ts          |  66 +++++++++---
+ packages/core/src/render3/public_interfaces.ts     |  13 ++-
+ packages/core/src/render3/query.ts                 |   2 +-
+ packages/core/src/render3/renderer.ts              |   9 +-
+ packages/core/test/render3/component_spec.ts       | 115 ++++++++++++++++++++-
+ packages/core/test/render3/imported_renderer2.ts   |   9 +-
+ packages/core/test/render3/render_util.ts          |  32 +++---
+ .../core/test/render3/renderer_factory_spec.ts     | 106 +++++++++++++++++++
+ 15 files changed, 342 insertions(+), 76 deletions(-)
+
+commit 09e3839994ab695bc7acaef87b79af7a0bcb8dc7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Dec 13 17:10:53 2017 +0100
+
+    perf: use style.setProperty instead of setAttribute in render3 and iv benchmarks (#20855)
+    
+    PR Close #20855
+
+ modules/benchmarks/src/largetable/iv/largetable.js | 2 +-
+ modules/benchmarks/src/largetable/render3/table.ts | 4 ++--
+ modules/benchmarks/src/tree/iv/tree.js             | 2 +-
+ modules/benchmarks/src/tree/render3/tree.ts        | 6 +++---
+ 4 files changed, 7 insertions(+), 7 deletions(-)
+
+commit f75296e04ed062f4545a372c97338d7ad609d622
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Dec 12 14:44:51 2017 +0100
+
+    perf: add benchmarks for IV and render3 with functions (tree) (#20855)
+    
+    PR Close #20855
+
+ modules/benchmarks/e2e_test/largetable_perf.ts     |  9 ++++++
+ modules/benchmarks/e2e_test/largetable_spec.ts     |  7 +++++
+ modules/benchmarks/e2e_test/tree_data.ts           | 12 ++++++++
+ modules/benchmarks/src/largetable/iv/index.html    | 31 +++++++++++++++++++
+ modules/benchmarks/src/largetable/iv/largetable.js |  9 ++++++
+ modules/benchmarks/src/tree/iv/index.html          | 30 ++++++++++++++++++
+ modules/benchmarks/src/tree/iv/tree.js             |  9 ++++++
+ .../src/tree/render3_function/index.html           | 36 ++++++++++++++++++++++
+ .../benchmarks/src/tree/render3_function/index.ts  | 29 +++++++++++++++++
+ 9 files changed, 172 insertions(+)
+
+commit 0867e851635162af2a033616098b4653cafaf14f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Dec 11 18:15:57 2017 +0100
+
+    perf: add large table and deep tree benchmarks for render3 (#20855)
+    
+    PR Close #20855
+
+ modules/benchmarks/e2e_test/largetable_perf.ts     |   9 ++
+ modules/benchmarks/e2e_test/largetable_spec.ts     |   7 ++
+ modules/benchmarks/e2e_test/tree_data.ts           |   6 +
+ .../benchmarks/src/largetable/render3/index.html   |  34 +++++
+ modules/benchmarks/src/largetable/render3/index.ts |  28 +++++
+ modules/benchmarks/src/largetable/render3/table.ts |  81 ++++++++++++
+ modules/benchmarks/src/tree/render3/index.html     |  36 ++++++
+ modules/benchmarks/src/tree/render3/index.ts       |  29 +++++
+ modules/benchmarks/src/tree/render3/tree.ts        | 139 +++++++++++++++++++++
+ 9 files changed, 369 insertions(+)
+
+commit 213baa37b0b71e72d00ad7b606ebfc2ade06b934
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 21 14:21:56 2017 +0200
+
+    ci: add Android 6 and 7 (#18803)
+    
+    PR Close #18803
+
+ browser-providers.conf.js | 32 +++++++++++++++++++++++++++-----
+ 1 file changed, 27 insertions(+), 5 deletions(-)
+
+commit 8959d7d3a7f4af255dbef4e47d2ae5eb61488d82
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 21 16:36:05 2017 +0200
+
+    ci: update Chrome and Firefox in SauceLabs (#18808)
+    
+    PR Close #18808
+
+ browser-providers.conf.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 516759b1ff97c55dbf73cf50ee06a359b403aa67
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 23 12:48:21 2017 +0200
+
+    test(platform-browser): fix mXSS attack test in Canary (#18809)
+    
+    PR Close #18809
+
+ packages/platform-browser/test/security/html_sanitizer_spec.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit aaf826e043e45fca794e0b4cc3909d48cb2a5e4a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 21 16:45:52 2017 +0200
+
+    ci: reactivate dev and beta channels in Chrome (#18809)
+    
+    PR Close #18809
+
+ browser-providers.conf.js | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+commit 11b5d1b286270bc6b0b08817b935af0072b1baec
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 23 11:00:51 2017 +0200
+
+    docs: add BrowserStack badge to README.md (#19314)
+    
+    PR Close #19314
+
+ README.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 12f77ca523aebeb31c6de09b2da5f02a2fda2e1b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 21 15:33:04 2017 +0200
+
+    ci: switch Edge from BS to SL (#19315)
+    
+    PR Close #19315
+
+ README.md                 | 2 +-
+ browser-providers.conf.js | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 36d37cc6aecbfbf4be37d63ddece9cca623c10d8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 28 16:07:52 2017 +0200
+
+    fix(core): complete EventEmitter in QueryList on component destroy (#18902)
+    
+    Fixes #18741
+    
+    PR Close #18902
+
+ packages/core/src/linker/query_list.ts              |  6 ++++++
+ packages/core/src/view/view.ts                      |  2 ++
+ packages/core/test/linker/query_integration_spec.ts | 12 ++++++++++++
+ 3 files changed, 20 insertions(+)
+
+commit f53f7241a0c0cb262eab184d3f63c8600d2ee41a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jul 25 17:40:24 2017 +0200
+
+    fix(core): correct order in ContentChildren query result (#18326)
+    
+    Fixes #16568
+    
+    PR Close #18326
+
+ packages/core/src/view/query.ts                     |  7 ++++++-
+ packages/core/test/linker/query_integration_spec.ts | 20 ++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+
+commit 2f9d8ff46d8d66cedd335ca3b17cc3b40a49f9b7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 9 23:15:40 2017 +0200
+
+    test(animations): disable buggy test in Chrome 39 (#18483)
+    
+    Fixes #15793
+
+ ...mations_with_web_animations_integration_spec.ts | 22 +++++++++++++---------
+ 1 file changed, 13 insertions(+), 9 deletions(-)
+
+commit e54bd59f228c73881c08b8f179f0fcf49e0f74ae
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 9 23:11:51 2017 +0200
+
+    fix(core): forbid destroyed views to be inserted or moved in VC (#18568)
+    
+    Fixes #17780
+
+ packages/core/src/view/refs.ts                |   6 +
+ packages/core/test/linker/integration_spec.ts | 304 +++++++++++++++-----------
+ 2 files changed, 181 insertions(+), 129 deletions(-)
+
+commit 1dca575701383bc6eb35a576629ad18585eb5b2c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 3 20:00:38 2017 +0200
+
+    fix(compiler): ignore @import in multi-line css (#18452)
+    
+    Fixes #18038
+
+ packages/compiler/src/style_url_resolver.ts       | 2 +-
+ packages/compiler/test/style_url_resolver_spec.ts | 4 ++++
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+commit 6a88659c9aab75ab936d38b93ec27c08258979eb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 3 01:09:38 2017 +0200
+
+    test(upgrade): fix an IE9 timer issue in downgrade module tests (#18482)
+
+ packages/upgrade/test/static/integration/downgrade_module_spec.ts | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit 4d117faf1ac61e225d4fcca53ba291a4a86d7cf1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 3 00:51:59 2017 +0200
+
+    test(common): skip some DatePipe tests in old Chrome where Intl is buggy (#15784)
+
+ packages/common/test/pipes/date_pipe_spec.ts | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+commit 065b76d14c0bf3bc89625ca492c1d7d153dfc51b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Apr 28 11:38:21 2017 +0200
+
+    feat(core): upgrade dep on zone.js to 0.8.9 (#16401)
+    
+    PR Close #16401
+
+ npm-shrinkwrap.clean.json | 4 ++--
+ npm-shrinkwrap.json       | 8 ++++----
+ package.json              | 2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+commit 46ce3317c31a7e59077ca713c2bcc6cd4da65980
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 6 14:11:58 2017 +0200
+
+    test(router): enable running the campaign in non-ES6 browsers
+    
+    Closes #15806.
+
+ packages/router/karma-test-shim.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b8d5f87f9647cc58de5d6f562bc7adead96a10e8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 13 11:40:44 2017 +0100
+
+    feat(compiler): support ICU messages in XLIFF
+    
+    Fixes #12636
+    Closes #15068
+
+ packages/compiler/src/i18n/serializers/xliff.ts    |  78 ++++---
+ .../compiler/test/i18n/integration_xliff_spec.ts   | 260 +++++++++++++++++++++
+ .../compiler/test/i18n/serializers/xliff_spec.ts   |  33 +++
+ 3 files changed, 340 insertions(+), 31 deletions(-)
+
+commit 95afaf495b61cec53b95b37aae57082e68efdcd0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 13 11:40:22 2017 +0100
+
+    test(compiler): refactor i18n integration test
+
+ packages/compiler/test/i18n/integration_common.ts  | 158 ++++++++++++++++++++
+ ...gration_spec.ts => integration_xmb_xtb_spec.ts} | 161 ++-------------------
+ 2 files changed, 168 insertions(+), 151 deletions(-)
+
+commit f92d644c955b186387da069200758a6a8bf8a541
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 16 17:13:07 2017 +0100
+
+    ci: disable Android 4.1, 4.2 and 4.3 in SauceLabs (#14461)
+    
+    These browsers are not supported anymore: https://wiki.saucelabs.com/pages/viewpage.action?pageId=67012495
+    
+    Tried to switch them to BrowserStack, but the emulators are too slow to run the full campaign (time out in tests, and disconnect eventually).
+
+ browser-providers.conf.js | 3 ---
+ 1 file changed, 3 deletions(-)
+
+commit dd36d413bacf1fa98b6657b1d3ff10357c72063d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 16 01:13:54 2017 +0100
+
+    build: update symlink scripts for Windows (#14987)
+
+ scripts/windows/create-symlinks.sh | 10 +++-------
+ scripts/windows/packages.txt       | 14 --------------
+ scripts/windows/remove-symlinks.sh | 10 +++-------
+ 3 files changed, 6 insertions(+), 28 deletions(-)
+
+commit 39f56fafddbb25b0336a70ca633805a04a2d6352
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 15 18:50:03 2017 +0100
+
+    feat(compiler-cli): add an `outFile` option to ng-xi18n
+    
+    Fixes #11416
+    Closes #14508
+    Closes #14657
+
+ .../@angular/compiler-cli/integrationtest/test/i18n_spec.ts  |  2 +-
+ .../compiler-cli/integrationtest/test/test_ngtools_api.ts    |  1 +
+ modules/@angular/compiler-cli/src/extract_i18n.ts            |  2 +-
+ modules/@angular/compiler-cli/src/extractor.ts               |  5 +++--
+ modules/@angular/compiler-cli/src/ngtools_api.ts             |  3 ++-
+ scripts/ci-lite/offline_compiler_test.sh                     |  2 +-
+ tools/@angular/tsc-wrapped/src/cli_options.ts                | 12 +++++++++---
+ 7 files changed, 18 insertions(+), 9 deletions(-)
+
+commit 234f05996cfc4e3c5261cd9b5e8b97a6de9399f3
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 16 17:03:18 2017 +0100
+
+    feat(compiler-cli): add a `locale` option to ng-xi18n
+    
+    Fixes #12303
+    Closes #14537
+
+ .../@angular/compiler-cli/integrationtest/test/i18n_spec.ts  |  2 +-
+ .../compiler-cli/integrationtest/test/test_ngtools_api.ts    |  1 +
+ modules/@angular/compiler-cli/src/extract_i18n.ts            |  3 ++-
+ modules/@angular/compiler-cli/src/extractor.ts               |  5 +++--
+ modules/@angular/compiler-cli/src/ngtools_api.ts             |  4 +++-
+ modules/@angular/compiler/src/i18n/extractor.ts              |  5 +++--
+ modules/@angular/compiler/src/i18n/message_bundle.ts         |  6 +++---
+ modules/@angular/compiler/src/i18n/serializers/serializer.ts |  2 +-
+ modules/@angular/compiler/src/i18n/serializers/xliff.ts      | 12 ++++++++----
+ modules/@angular/compiler/src/i18n/serializers/xmb.ts        |  4 ++--
+ modules/@angular/compiler/src/i18n/serializers/xtb.ts        |  2 +-
+ modules/@angular/compiler/test/i18n/message_bundle_spec.ts   |  2 +-
+ .../@angular/compiler/test/i18n/serializers/xliff_spec.ts    |  8 +++++---
+ modules/@angular/compiler/test/i18n/serializers/xmb_spec.ts  | 10 +++++++---
+ modules/@angular/compiler/test/i18n/serializers/xtb_spec.ts  |  4 ++--
+ scripts/ci-lite/offline_compiler_test.sh                     |  2 +-
+ tools/@angular/tsc-wrapped/src/cli_options.ts                |  4 +++-
+ 17 files changed, 47 insertions(+), 29 deletions(-)
+
+commit e58d683931c6bbba63f15fca71edfeec9f970a97
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jan 26 10:27:07 2017 +0100
+
+    fix(compiler-cli): prevent ng-xi18n from emitting the compilation output (#14115)
+    
+    fixes #13567
+    
+    PR Close #14115
+
+ .../compiler-cli/integrationtest/test/i18n_spec.ts |  6 ++++
+ .../integrationtest/tsconfig-xi18n.json            | 34 ++++++++++++++++++++++
+ modules/@angular/compiler-cli/src/extract_i18n.ts  |  2 +-
+ scripts/ci-lite/offline_compiler_test.sh           |  6 ++--
+ 4 files changed, 44 insertions(+), 4 deletions(-)
+
+commit f364557629754184251a37b87be050b685055134
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 11 16:32:34 2017 +0100
+
+    fix(common): support numeric value as discrete cases for NgPlural (#13876)
+    
+    PR Close #13876
+
+ modules/@angular/common/src/directives/ng_plural.ts    |  3 ++-
+ .../@angular/common/test/directives/ng_plural_spec.ts  | 18 +++++++++++++++++-
+ 2 files changed, 19 insertions(+), 2 deletions(-)
+
+commit 55dfa1b69db31034b3dee7603a432f1e6181e978
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Dec 16 02:07:26 2016 +0100
+
+    test(forms): refactor integration tests to improve speed (#13500)
+
+ modules/@angular/compiler/src/metadata_resolver.ts |   2 +-
+ .../forms/test/reactive_integration_spec.ts        | 205 +++++++++------------
+ .../forms/test/template_integration_spec.ts        | 130 ++++++-------
+ 3 files changed, 146 insertions(+), 191 deletions(-)
+
+commit d17e690eb4b1652e028d8b1b7839c7b2b9cced66
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Dec 12 18:29:23 2016 +0100
+
+    test(upgrade): fix failing test in browsers which do not support RAF
+    
+    closes #13399
+
+ modules/@angular/upgrade/test/upgrade_spec.ts | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 714f2af0dd8f6742cd5774ab7f305d557cd5afdf
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Dec 13 20:32:31 2016 +0100
+
+    ci(browser providers): update browsers in SL and BS (#13431)
+
+ browser-providers.conf.js | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit e23076f767d96b839c5c2771252e8a16d6b92369
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Dec 13 01:41:35 2016 +0100
+
+    build: update the package list of the symlinks scripts for Windows (#13408)
+
+ scripts/windows/packages.txt | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 61129fa12d34ef35996eec85a48295f873b21dde
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 28 02:10:02 2016 +0200
+
+    fix(compiler): move detection of unsafe properties for binding to ElementSchemaRegistry (#11378)
+
+ .../src/schema/dom_element_schema_registry.ts      |   22 +
+ .../compiler/src/schema/element_schema_registry.ts |    2 +
+ .../src/template_parser/template_parser.ts         |   22 +-
+ .../schema/dom_element_schema_registry_spec.ts     |   41 +
+ .../test/template_parser/template_parser_spec.ts   | 2588 ++++++++++----------
+ .../compiler/testing/schema_registry_mock.ts       |   22 +-
+ modules/@angular/compiler/testing/test_bindings.ts |    2 +-
+ .../core/test/linker/security_integration_spec.ts  |    2 +-
+ 8 files changed, 1409 insertions(+), 1292 deletions(-)
+
+commit cc6481077f4bafbd20b336fef38d6b8815d42feb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 22 19:31:38 2016 +0200
+
+    ci(BrowserStack): add Safari 10 (#11796)
+
+ browser-providers.conf.js | 42 ++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 34 insertions(+), 8 deletions(-)
+
+commit 14ee75924b6ae770115f7f260d720efa8bfb576a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 14 15:41:44 2016 +0200
+
+    fix(common): fix ngOnChanges signature of NgTemplateOutlet directive
+
+ modules/@angular/common/src/directives/ng_template_outlet.ts | 4 ++--
+ tools/public_api_guard/common/index.d.ts                     | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 8858ebc4ab91009220300d1172dfb57b31b0a464
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 6 21:07:48 2016 +0200
+
+    ci: update SauceLabs badge when running CI on master (#11352)
+
+ README.md                         |  3 ++-
+ scripts/ci-lite/env.sh            | 12 ++++++++++--
+ scripts/ci-lite/test_saucelabs.sh |  2 +-
+ 3 files changed, 13 insertions(+), 4 deletions(-)
+
+commit 5ee0f09b924ba2357f225d66f76990e5d621eab0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 6 19:25:59 2016 +0200
+
+    build: update the symlinks scripts for Windows to new packaging (#11192)
+
+ scripts/windows/create-symlinks.sh |  4 ++--
+ scripts/windows/packages.txt       | 21 +++++++++++++--------
+ scripts/windows/remove-symlinks.sh |  2 +-
+ 3 files changed, 16 insertions(+), 11 deletions(-)
+
+commit c25d1f7ecc66fc60e525ae20982443b04bfbf5fd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 6 19:24:48 2016 +0200
+
+    test: reactivate the remaining disabled tests in Edge (#11188)
+    
+    Fixes #4756
+
+ .../@angular/common/test/pipes/slice_pipe_spec.ts  | 22 +++++++++-------------
+ 1 file changed, 9 insertions(+), 13 deletions(-)
+
+commit 1b5e2b5129fac0b2225065251587e9b37cb12694
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 1 00:55:13 2016 +0200
+
+    test: add Intl polyfill and run Intl tests in all browsers (#10471)
+
+ .../@angular/common/test/pipes/date_pipe_spec.ts   | 140 ++++++++++++---------
+ .../@angular/common/test/pipes/number_pipe_spec.ts | 109 ++++++++--------
+ .../platform-browser/test/browser_util_spec.ts     |  49 +++++---
+ .../platform-browser/testing/browser_util.ts       |  18 ++-
+ shims_for_IE.js                                    |   9 ++
+ 5 files changed, 196 insertions(+), 129 deletions(-)
+
+commit 6e40ef0f6d6c27371a7a7aa5e1351c7f6624fbc3
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 31 04:58:22 2016 +0200
+
+    refactor: remove requestAnimationFrame from polyfills and platforms (#10528)
+
+ .../src/browser/browser_adapter.ts                 |  4 ---
+ .../platform-browser/src/dom/dom_adapter.ts        |  2 --
+ .../src/web_workers/worker/worker_adapter.ts       |  2 --
+ .../@angular/platform-server/src/parse5_adapter.ts |  2 --
+ shims_for_IE.js                                    | 29 ----------------------
+ 5 files changed, 39 deletions(-)
+
+commit 5ff14de1f3fdafd5bec1ac7fd4a8bff17d467f6e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 29 21:41:58 2016 +0200
+
+    chore: force lf EOL for ts files (#11143)
+
+ .gitattributes | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 38069aba35ac2914bb0a366036271a1388f7c275
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 29 17:18:55 2016 +0200
+
+    fix(compiler): make ShadowCSS shim work on Android browser (#11139)
+    
+    Fixes #11123
+
+ modules/@angular/compiler/src/shadow_css.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 7dee1ee4cf1c08a9c69d4476f0bdedf536bb9b63
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 29 17:17:45 2016 +0200
+
+    test(core): update ErrorHandler tests to handle browsers without stack (#11141)
+    
+    Fixes #11114
+
+ modules/@angular/core/test/error_handler_spec.ts | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
+
+commit 6c77d7182ad86ae3b4fc6c60cf4737533b84ac4c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Sat Aug 27 00:41:50 2016 +0200
+
+    fix(compiler-cli): make ngc to work on Windows (#10919)
+    
+    Fixes #10792
+
+ modules/@angular/compiler-cli/src/reflector_host.ts | 11 ++++++-----
+ test.sh                                             |  6 +++++-
+ 2 files changed, 11 insertions(+), 6 deletions(-)
+
+commit 3dd85cb7f14cc0aa01e627015724d51fd1ec5154
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Sat Aug 27 00:36:04 2016 +0200
+
+    test(tools): make the test suite to pass on Windows (#10926)
+
+ tools/@angular/tsc-wrapped/test/typescript.mocks.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0cf5ece7f8be32cd8f3a49d8243f9b744f90ff27
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Aug 26 18:12:10 2016 +0200
+
+    build: workaround to run presubmit.sh on Windows (#11096)
+
+ .../@angular/compiler/test/template_parser/template_parser_spec.ts   | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit 66df335998d097fa8fe46dec41f1183737332021
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Aug 26 02:28:36 2016 +0200
+
+    chore(dependencies): switch from es6-shim to core-js (#10884)
+
+ build.sh                                                |  2 +-
+ karma-js.conf.js                                        |  2 +-
+ modules/@angular/docs/bundles/overview.md               |  2 +-
+ modules/@angular/http/src/index.ts                      |  2 +-
+ modules/@angular/package.json                           | 17 -----------------
+ modules/@angular/router/karma.conf.js                   |  2 +-
+ modules/angular1_router/karma-router.conf.js            |  2 +-
+ modules/benchpress/index.ts                             |  2 +-
+ modules/benchpress/package.json                         |  2 +-
+ modules/benchpress/test/firefox_extension/conf.ts       |  2 +-
+ modules/playground/src/bootstrap.ts                     |  2 +-
+ modules/playground/src/web_workers/images/loader.js     |  2 +-
+ modules/playground/src/web_workers/input/loader.js      |  2 +-
+ .../playground/src/web_workers/kitchen_sink/loader.js   |  2 +-
+ .../playground/src/web_workers/message_broker/loader.js |  2 +-
+ modules/playground/src/web_workers/router/loader.js     |  2 +-
+ modules/playground/src/web_workers/todo/loader.js       |  2 +-
+ npm-shrinkwrap.clean.json                               |  5 +----
+ npm-shrinkwrap.json                                     | 11 +++--------
+ package.json                                            |  2 +-
+ tools/cjs-jasmine/index-tools.ts                        |  2 +-
+ tools/cjs-jasmine/index.ts                              |  2 +-
+ 22 files changed, 23 insertions(+), 48 deletions(-)
+
+commit cbe0976426d89d3eb2c0a958acd5f2a1a5af0339
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 25 23:56:14 2016 +0200
+
+    test: improve perfs by removing unneeded TestBed.compileComponents() calls (#11083)
+
+ modules/@angular/compiler/test/i18n/integration_spec.ts                | 2 --
+ modules/@angular/core/test/debug/debug_node_spec.ts                    | 1 -
+ modules/@angular/core/test/linker/entry_components_integration_spec.ts | 1 -
+ modules/@angular/core/test/linker/integration_spec.ts                  | 1 -
+ modules/@angular/forms/test/reactive_integration_spec.ts               | 1 -
+ modules/@angular/forms/test/template_integration_spec.ts               | 1 -
+ 6 files changed, 7 deletions(-)
+
+commit d7c82f5c0f35953f80ee8bc6c055161707d4e363
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 25 23:37:46 2016 +0200
+
+    test: fix memory leak when running test campaign (#11072)
+
+ modules/@angular/core/testing/component_fixture.ts | 36 +++++----
+ modules/@angular/core/testing/test_bed.ts          |  8 +-
+ .../directives/abstract_form_group_directive.ts    |  8 +-
+ .../reactive_directives/form_control_name.ts       |  9 ++-
+ .../reactive_directives/form_group_name.ts         | 10 ++-
+ .../forms/test/template_integration_spec.ts        | 88 +++++++++++-----------
+ 6 files changed, 92 insertions(+), 67 deletions(-)
+
+commit 5b99b8c18a95304e09dc8a708d765085ec1f410f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Aug 12 19:35:19 2016 +0200
+
+    test: add Blob and FormData polyfills for testing in IE9 (#10563)
+
+ shims_for_IE.js | 254 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 254 insertions(+)
+
+commit 6a011f4e8e553ca991afe6ee43d43d97ddb850d6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Aug 12 19:34:55 2016 +0200
+
+    test(security): work around an escaping bug in IE9 (#10493)
+
+ modules/@angular/core/test/linker/security_integration_spec.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c8da7e995ff75e29960ee527b1926f7a9d04ce5a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 9 16:20:57 2016 +0200
+
+    test(router): Android browser does not support element.click()
+
+ modules/@angular/router/test/router.spec.ts | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+commit 8be6b12c2bc0b313f87e0a9d454ad174b5b285cb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 9 16:20:26 2016 +0200
+
+    test(router): use Object.isFrozen instead of relying on an exception
+
+ modules/@angular/router/test/recognize.spec.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 4728f29f678bf69a352091c1f9d61c8bfd1cadf6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 9 16:17:55 2016 +0200
+
+    test(router): increase Karma timers and add polyfills for old browsers
+
+ modules/@angular/router/karma.conf.js | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+commit cd18de7a2167e0a81ac6dba03e586e030784d899
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 4 19:35:41 2016 +0200
+
+    refactor(compiler): use Object.keys instead of Object.getOwnPropertyNames (#10498)
+
+ modules/@angular/common/src/directives/ng_plural.ts           | 4 ++--
+ modules/@angular/common/src/pipes/i18n_plural_pipe.ts         | 2 +-
+ modules/@angular/compiler/src/i18n/serializers/placeholder.ts | 5 ++---
+ modules/@angular/compiler/src/i18n/serializers/xmb.ts         | 4 ++--
+ modules/@angular/compiler/src/i18n/serializers/xml_helper.ts  | 8 +++-----
+ modules/@angular/compiler/src/i18n/serializers/xtb.ts         | 2 +-
+ modules/@angular/compiler/test/i18n/i18n_parser_spec.ts       | 2 +-
+ modules/@angular/compiler/test/i18n/serializers/xmb_spec.ts   | 2 +-
+ modules/@angular/compiler/test/i18n/serializers/xtb_spec.ts   | 5 ++---
+ modules/@angular/compiler/test/schema/schema_extractor.ts     | 4 ++--
+ modules/@angular/compiler/testing/metadata_overrider.ts       | 4 ++--
+ 11 files changed, 19 insertions(+), 23 deletions(-)
+
+commit 7db75fa36157cb6ac4615fdb2e25248d328a3822
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 2 19:58:03 2016 +0200
+
+    test: reactivate some of the disabled tests in Edge (#10450)
+
+ .../core/test/reflection/reflector_spec.ts         | 62 ++++++++--------
+ modules/@angular/facade/test/async_spec.ts         | 84 +++++++++++-----------
+ .../shared/service_message_broker_spec.ts          | 34 ++++-----
+ 3 files changed, 84 insertions(+), 96 deletions(-)
+
+commit f9573ece4105bc54ddbb03a6ac7f04d06f4e3173
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 1 17:00:12 2016 +0200
+
+    ci(browser providers): update browsers in SL and BS (#10425)
+
+ browser-providers.conf.js | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit 43c71ae1032234ffeb31695c0e74f33834904ffd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jul 29 19:05:12 2016 +0200
+
+    fix(platform-browser): IEMobile is badly detected when testing (#10382)
+
+ modules/@angular/platform-browser/test/browser_util_spec.ts | 12 ++++++++++++
+ modules/@angular/platform-browser/testing/browser_util.ts   |  9 ++++++---
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+commit f0bd528d77c6992674e7a9a195f6715ce50d6630
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jul 29 14:37:37 2016 +0200
+
+    test(http): fix Blob creation for Android <= 4.3
+    
+    Closes #10377
+
+ .../http/test/backends/xhr_backend_spec.ts         | 24 ++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
+
+commit 50a024b42f39187014a8b53f6e7379384621821c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jul 29 14:30:35 2016 +0200
+
+    test(http): add Typed Array polyfill for IE9
+
+ shims_for_IE.js | 1051 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 1051 insertions(+)
+
+commit b48f7bcb8d09dd51a14cfce7dbb36dd043e350b7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jul 29 15:53:22 2016 +0200
+
+    fix(forms): normalize written value in NumberValueAccessor
+    
+    Closes #10379
+
+ .../common/src/forms-deprecated/directives/number_value_accessor.ts | 6 ++++--
+ modules/@angular/forms/src/directives/number_value_accessor.ts      | 6 ++++--
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+commit ca16fc29a640bd0201a5045ff128d3813088bdc0
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Jul 21 18:01:47 2016 +0200
+
+    build: fix and document the symlinks scripts for Windows
+    
+    Closes #10213
+
+ DEVELOPER.md                       | 12 ++++++++++++
+ scripts/windows/create-symlinks.sh |  3 ++-
+ scripts/windows/remove-symlinks.sh |  3 ++-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+
+commit 9decc3d823d2142b3355658af8dfd8bf8abf4957
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 21 00:25:55 2016 +0200
+
+    build: fix some issues on Windows platforms
+    
+    Closes #9450
+
+ .gitattributes                     |  3 +++
+ build.sh                           | 10 +++++-----
+ gulpfile.js                        |  4 +++-
+ package.json                       |  2 +-
+ scripts/windows/create-symlinks.sh | 10 ++++++++++
+ scripts/windows/packages.txt       |  9 +++++++++
+ scripts/windows/remove-symlinks.sh | 10 ++++++++++
+ tools/tsc-watch/tsc_watch.ts       |  4 +++-
+ 8 files changed, 44 insertions(+), 8 deletions(-)
+
+commit b34a04d53a01c94d78be0df235046e0b67012292
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jun 10 00:21:17 2016 +0200
+
+    chore(build): activate optional jobs in SL and BS (#8605)
+
+ .travis.yml | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit 61b339678dbf61ef4bbcf65ed5d8ca52cea4a139
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue May 10 17:47:17 2016 -0700
+
+    test(compiler): test schema generation only in Chrome
+    
+    Closes #8581
+
+ .../schema/dom_element_schema_registry_spec.ts     | 19 +++++----
+ .../platform-browser/test/browser_util_spec.ts     | 46 +++++++++++++++-------
+ .../platform-browser/testing/browser_util.ts       |  4 ++
+ 3 files changed, 47 insertions(+), 22 deletions(-)
+
+commit d537a26297c44d3d9638b799a46e689187d6752b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon May 9 16:47:26 2016 -0700
+
+    chore(build): reenable optional jobs in SL and BS
+    
+    Closes #8558
+
+ .travis.yml                          | 13 ++++++++-----
+ browser-providers.conf.js            | 16 ++++++++--------
+ karma-js.conf.js                     |  2 +-
+ scripts/ci-lite/cleanup.sh           |  6 ++++++
+ scripts/ci-lite/env.sh               |  6 ++++++
+ scripts/ci-lite/install.sh           |  4 ++--
+ scripts/ci-lite/test_browserstack.sh |  2 +-
+ scripts/ci-lite/test_saucelabs.sh    |  2 +-
+ 8 files changed, 33 insertions(+), 18 deletions(-)
+
+commit 391a9edabbcb81cb6a26c2c1be3ce3475387114a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Nov 19 23:37:55 2015 +0100
+
+    chore(build): use Chromium in Travis for JS tests
+
+ .travis.yml                    |  9 +++++--
+ protractor-shared.js           | 11 ++++++++
+ scripts/ci/install_chromium.sh | 59 ++++++++++++++++++++++++++++++++++++++++++
+ scripts/ci/test_dart.sh        |  2 +-
+ scripts/ci/test_js.sh          |  2 +-
+ scripts/ci/test_router.sh      |  2 +-
+ scripts/ci/test_server_dart.sh |  2 +-
+ 7 files changed, 81 insertions(+), 6 deletions(-)
+
+commit ae7d2ab515a3761e14d023c2f2ce8176fe019cd4
+Author: mlaval <mlaval@amadeus.com>
+Date:   Fri Jan 29 13:58:06 2016 +0100
+
+    fix(bundle): add angular2/platform/testing/browser to SystemJS testing bundle
+
+ gulpfile.js                               | 2 +-
+ modules/angular2/docs/bundles/overview.md | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit fc5b128b43935b59599572873508113742d81531
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 27 23:39:47 2016 +0100
+
+    chore(ci): deflake test and turn on saucelabs_required
+    
+    Fixes #6725
+    
+    Closes #6733
+
+ .travis.yml                                          | 2 --
+ modules/angular2/test/testing/testing_public_spec.ts | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
+commit 4291758079ca6b312ec8f5b274ead5a8c2f79494
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Dec 10 14:40:00 2015 +0100
+
+    build(sauce/bs): make some browsers required in CI
+    
+    Closes #5795
+
+ .travis.yml                     | 10 ++++---
+ browser-providers.conf.js       | 62 +++++++++++++++++++++++++++++++++--------
+ gulpfile.js                     | 13 +++++++--
+ karma-js.conf.js                |  4 +--
+ scripts/ci/build_and_test.sh    |  6 ++--
+ scripts/ci/test_browserstack.sh |  4 ++-
+ scripts/ci/test_saucelabs.sh    |  4 ++-
+ 7 files changed, 78 insertions(+), 25 deletions(-)
+
+commit c1ae49d91efc4d04560e1f8100c94eb9e8878861
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Dec 9 00:06:45 2015 +0100
+
+    fix(testing): remove Symbol dummy shim
+    
+    Closes #5067
+    
+    Closes #5719
+
+ modules/angular2/src/testing/shims_for_IE.js | 4 ----
+ 1 file changed, 4 deletions(-)
+
+commit 4fa1809f807958651ede509e23fe07279b404ce8
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Nov 26 15:54:25 2015 +0100
+
+    chore(build): make the unit tests campaign to run again in Edge
+
+ modules/angular2/test/facade/async_spec.ts | 80 ++++++++++++++++--------------
+ 1 file changed, 43 insertions(+), 37 deletions(-)
+
+commit 2a4ac63a34340d2951e138cff5fa0ee4d0ea00be
+Author: mlaval <mlaval@amadeus.com>
+Date:   Mon Nov 30 11:29:58 2015 +0100
+
+    chore(build): split browsers between providers
+
+ browser-providers.conf.js | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+commit fb16c394965e210b0e1a656da3e2b261bc75c544
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Nov 26 19:38:14 2015 +0100
+
+    chore(build): fix flakiness of the element probe global test
+
+ modules/angular2/src/facade/lang.ts                                     | 2 +-
+ modules/angular2/src/platform/browser/tools/tools.ts                    | 2 +-
+ modules/angular2/src/platform/dom/debug/debug_element_view_listener.ts  | 2 +-
+ .../test/platform/browser/debug/debug_element_view_listener_spec.ts     | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+commit cf157b99d3186f568a2afea10c6cd74f9c81bb44
+Author: mlaval <mlaval@amadeus.com>
+Date:   Wed Nov 25 18:35:46 2015 +0100
+
+    chore(test): fix public API test in some browsers
+    
+    Fixes #5470
+    
+    Closes #5478
+
+ modules/angular2/test/public_api_spec.ts | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 230aad4047efee4e9204fd835c1fb9465f83f0d5
+Author: mlaval <mlaval@amadeus.com>
+Date:   Fri Nov 20 16:40:34 2015 +0100
+
+    chore(build): remove iOS9 from CI
+    
+    Closes #5409
+
+ browser-providers.conf.js | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 5806babb0b99f9d873ae114701a47372f1c7b8d9
+Author: mlaval <mlaval@amadeus.com>
+Date:   Fri Nov 20 16:59:21 2015 +0100
+
+    chore(build): increase timeout of the 5 most flaky tests
+    
+    Closes #5410
+
+ .../test/platform/browser/debug/debug_element_view_listener_spec.ts | 2 +-
+ modules/angular2/test/web_workers/shared/message_bus_spec.ts        | 2 +-
+ modules/angular2_material/test/button_spec.ts                       | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 4d59985b745f68730fae9e2d96823055d371f935
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Nov 19 21:19:04 2015 +0100
+
+    chore(build): use Chrome by default for all JS tests
+    
+    Fixes #5380
+    
+    Closes #5387
+
+ gulpfile.js                                  | 7 ++++---
+ modules/angular1_router/karma-router.conf.js | 2 +-
+ scripts/ci/test_js.sh                        | 2 +-
+ scripts/ci/test_router.sh                    | 2 +-
+ 4 files changed, 7 insertions(+), 6 deletions(-)
+
+commit c855c5ddc2642cc1c8da6463082d785f5c80874b
+Author: mlaval <mlaval@amadeus.com>
+Date:   Tue Nov 17 15:44:00 2015 +0100
+
+    chore(saucelabs): update browser versions
+    
+    Closes #5336
+
+ browser-providers.conf.js | 6 +++---
+ karma-js.conf.js          | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+commit bccd8a719d1ae530f4b1d632419b5e6366a728c5
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Nov 5 11:45:46 2015 +0100
+
+    build(browserstack): add Windows Phone to CI
+    
+    Closes #5138
+
+ browser-providers.conf.js | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+commit a70a919d14ba2e75771e939be22372e8a693ec90
+Author: mlaval <mlaval@amadeus.com>
+Date:   Fri Nov 6 13:57:27 2015 +0100
+
+    chore(browserstack): deactivate failing Android browsers
+    
+    Closes #5158
+
+ browser-providers.conf.js | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 63639895ad2bbf8f4c82458798a11fc29ccb0606
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Nov 13 17:09:38 2015 +0100
+
+    chore(package): update karma-browserstack-launcher to 0.1.7
+    
+    Closes #5276
+
+ npm-shrinkwrap.clean.json |  5 ++---
+ npm-shrinkwrap.json       | 22 +++++++++++-----------
+ package.json              |  2 +-
+ 3 files changed, 14 insertions(+), 15 deletions(-)
+
+commit ee07646059e561bdb0039a534904a5e5d24a3718
+Author: mlaval <mlaval@amadeus.com>
+Date:   Tue Nov 3 15:53:28 2015 +0100
+
+    chore(test): fix public API test failure when no support of Symbol.for
+    
+    `@@observable` is the token used in RxJS to define `Symbol.observable`
+    
+    Closes #5093
+
+ modules/angular2/test/symbol_inspector/symbol_inspector.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c5693f07dc834f69a51b319fac3ff7fb819ea078
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Nov 6 10:55:04 2015 +0100
+
+    chore(browserstack): use patched karma launcher
+    
+    closes #5142
+
+ karma-js.conf.js          |   3 +-
+ npm-shrinkwrap.clean.json |   1 +
+ npm-shrinkwrap.json       | 308 +++++++++++++++++++++++-----------------------
+ package.json              |   2 +-
+ 4 files changed, 158 insertions(+), 156 deletions(-)
+
+commit c70e07fd1f672eb1fb70a12d08614979cd1e137f
+Author: mlaval <mlaval@amadeus.com>
+Date:   Wed Nov 4 11:59:44 2015 +0100
+
+    build(browserstack): add a Gulp task to use Browser Stack locally
+    
+    Closes #5116
+
+ DEVELOPER.md | 21 ++++++++++++++++
+ gulpfile.js  | 78 +++++++++++++++++++++++++++++-------------------------------
+ 2 files changed, 59 insertions(+), 40 deletions(-)
+
+commit fd92dc0701c06d5a80c91de8fe13fc2d4c356150
+Author: mlaval <mlaval@amadeus.com>
+Date:   Tue Nov 3 17:26:56 2015 +0100
+
+    build(browserstack): add all supported browsers
+    
+    Closes #5096
+
+ browser-providers.conf.js | 111 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 108 insertions(+), 3 deletions(-)
+
+commit a16214c614d5eed1ae7c5faeb1d3073054a857c7
+Author: mlaval <mlaval@amadeus.com>
+Date:   Mon Nov 2 16:02:22 2015 +0100
+
+    chore(test): failures in browsers which do no support Symbol.iterator
+    
+    Closes #5069
+
+ modules/angular2/src/testing/shims_for_IE.js | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit d6e7a51d9c3e5d7978581c7a708cafc754db0c53
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Nov 2 00:37:42 2015 +0100
+
+    chore(build): npm install fails on Windows after analytics feat
+    
+    Closes #5055
+
+ package.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 13447e3198abcacef6e5fe5fcb77dd755f56ad4d
+Author: mlaval <mlaval@amadeus.com>
+Date:   Tue Oct 27 16:09:09 2015 +0100
+
+    build(browserstack): initial setup
+    
+    Closes #4941
+
+ .travis.yml                                  |  4 +++
+ sauce.conf.js => browser-providers.conf.js   | 19 +++++++++--
+ gulpfile.js                                  | 25 ++++++++++----
+ karma-dart.conf.js                           |  4 +--
+ karma-js.conf.js                             | 33 +++++++++++++-----
+ modules/angular1_router/karma-router.conf.js |  4 +--
+ scripts/browserstack/start_tunnel.js         | 50 ++++++++++++++++++++++++++++
+ scripts/browserstack/start_tunnel.sh         |  3 ++
+ scripts/browserstack/teardown_tunnel.sh      |  8 +++++
+ scripts/browserstack/waitfor_tunnel.sh       | 19 +++++++++++
+ scripts/ci/after-script.sh                   |  3 ++
+ scripts/ci/build_and_test.sh                 |  2 +-
+ scripts/ci/test_browserstack.sh              | 12 +++++++
+ 13 files changed, 164 insertions(+), 22 deletions(-)
+
+commit 84fe0c9d3e4280c09e1a7890c70bd550700e46eb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Oct 27 15:52:08 2015 +0100
+
+    build(browserstack): add npm dependencies
+
+ npm-shrinkwrap.clean.json | 124 ++++++++++++++++++++++++++++++
+ npm-shrinkwrap.json       | 188 ++++++++++++++++++++++++++++++++++++++++++++++
+ package.json              |   2 +
+ 3 files changed, 314 insertions(+)
+
+commit 1dc8a0a95d4d6abd2f962f36b386a68bd30030eb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Sat Oct 17 01:01:59 2015 +0200
+
+    fix(build): EMFILE error on Windows when executing JS unit tests
+    
+    Fixes #4525
+    
+    Closes #4796
+
+ gulpfile.js | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+commit e37799a2a58716257606f5570b69f08586b0fc13
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Oct 29 15:48:31 2015 +0100
+
+    fix(test): Android browser does not support calc() a CSS unit value
+    
+    Closes #5001
+
+ modules/angular2/test/core/compiler/shadow_css_spec.ts | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+commit c4964e7c9b2084d1fd91d60dc05ef8d9fbdb5b81
+Author: mlaval <mlaval@amadeus.com>
+Date:   Thu Oct 29 14:38:35 2015 +0100
+
+    fix(test): "integration tests svg should support svg elements" fails in non-Chrome browsers
+    
+    Fixes #4987
+    
+    Closes #5000
+
+ modules/angular2/test/core/linker/integration_spec.ts | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 94274049d447c504d6564b375adf65971fa44a14
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Oct 27 00:44:32 2015 +0100
+
+    chore(saucelabs): update to Safari 9
+    
+    Closes #4927
+
+ sauce.conf.js | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 427860a5bdff1f0ff9806a236a7593b354df151e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Sep 28 00:38:30 2015 +0200
+
+    chore(saucelabs): add Edge
+    
+    Closes #4758
+
+ .../test/core/reflection/reflector_spec.ts         | 70 +++++++++++++---------
+ modules/angular2/test/pipes/slice_pipe_spec.ts     | 25 ++++----
+ sauce.conf.js                                      | 10 +++-
+ 3 files changed, 64 insertions(+), 41 deletions(-)
+
+commit b89c5bc5818c62e775b0b0211931a81a32fd0293
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Oct 14 18:04:38 2015 +0200
+
+    fix(compiler): attribute case in IE9
+    
+    Closes #4743
+
+ modules/angular2/src/core/compiler/html_parser.ts       | 4 +++-
+ modules/angular2/test/core/compiler/html_parser_spec.ts | 8 ++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+commit e15e2428c5aab19354e778301dc687099f2686b2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Oct 12 23:30:51 2015 +0200
+
+    fix(test): command compiler attr merge test in IE
+
+ modules/angular2/test/core/compiler/command_compiler_spec.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 0def28e594f61fbf2e98167d1611a997b74c020b
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Oct 9 15:05:38 2015 +0200
+
+    fix(compiler): shadow CSS @import test in some browsers
+    
+    Closes #4629
+
+ modules/angular2/src/test_lib/utils.ts                 |  3 ++-
+ modules/angular2/test/core/compiler/shadow_css_spec.ts | 14 +++++++++-----
+ 2 files changed, 11 insertions(+), 6 deletions(-)
+
+commit 5040a8e0dff9e20dfb282d33d4e5a9b94793775e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Oct 6 18:30:18 2015 +0200
+
+    chore(saucelabs): fallback from Firefox dev to beta
+    
+    Closes #4553
+
+ sauce.conf.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b44c13bc4672967104b72c1088075e65d6aa5c58
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Oct 2 13:55:12 2015 +0200
+
+    fix(compiler): const is not supported in IE9 and IE10
+    
+    Closes #4465
+
+ modules/angular2/src/core/compiler/util.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 33593cf8a29c6b03068c415bf1308a9429a1cd1a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 27 17:44:59 2015 +0200
+
+    fix(build): Use Angular's testability API to wait for end of e2e tests
+    
+    Closes #3911
+
+ .../src/core/testability/browser_testability.dart      |  7 ++++++-
+ .../src/core/testability/browser_testability.ts        |  2 ++
+ modules/angular2/src/core/testability/testability.ts   |  4 +++-
+ modules/angular2/src/test_lib/perf_util.ts             |  4 +++-
+ modules/benchmarks/e2e_test/change_detection_perf.ts   | 18 ++++++++++++------
+ modules/benchmarks/e2e_test/di_perf.ts                 | 18 ++++++++++++------
+ modules/benchmarks/e2e_test/element_injector_perf.ts   |  6 ++++--
+ modules/benchmarks/e2e_test/selector_perf.ts           |  9 ++++++---
+ modules/benchmarks_external/e2e_test/compiler_perf.ts  |  6 ++++--
+ .../benchmarks_external/e2e_test/largetable_perf.ts    |  3 ++-
+ .../e2e_test/naive_infinite_scroll_perf.ts             |  3 ++-
+ .../benchmarks_external/e2e_test/polymer_tree_perf.ts  |  3 ++-
+ .../benchmarks_external/e2e_test/react_tree_perf.ts    |  6 ++++--
+ .../benchmarks_external/e2e_test/static_tree_perf.ts   | 10 +++++++---
+ modules/benchmarks_external/e2e_test/tree_perf.ts      |  3 ++-
+ .../web_workers/kitchen_sink/kitchen_sink_spec.ts      | 11 +++++++----
+ .../web_workers/message_broker/message_broker_spec.ts  |  8 +++++---
+ .../examples/e2e_test/web_workers/todo/todo_spec.ts    |  5 +++--
+ protractor-shared.js                                   | 17 ++++++++++++++++-
+ 19 files changed, 102 insertions(+), 41 deletions(-)
+
+commit 5557a5716d6f592e35575dabd577a2e1ee81933d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 29 15:09:02 2015 +0200
+
+    chore(saucelabs): fix badge
+    
+    Closes #4412
+
+ .travis.yml | 5 +++--
+ gulpfile.js | 5 ++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit eafa48205244fc3627421e07fc57351f36d870cd
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 29 14:22:52 2015 +0200
+
+    chore(saucelabs): add latest Safaris
+    
+    Closes #4411
+
+ .../test/core/render/dom/compiler/shadow_css_spec.ts       |  3 ++-
+ sauce.conf.js                                              | 14 ++++++++++----
+ 2 files changed, 12 insertions(+), 5 deletions(-)
+
+commit e1853b33d32aa05dc58a682f31ff197efb343da9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Sep 28 22:50:17 2015 +0200
+
+    chore(saucelabs): add matrix badge to README.md
+    
+    Closes #4400
+
+ .travis.yml | 4 ++--
+ README.md   | 1 +
+ gulpfile.js | 4 +++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+commit 47317142440dae44001228c5d8bb8acf48d01142
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Sep 25 17:07:04 2015 +0200
+
+    chore(saucelabs): update browsers list
+    
+    Closes #4366
+
+ karma-js.conf.js |  2 +-
+ sauce.conf.js    | 21 ++++++++++++++-------
+ 2 files changed, 15 insertions(+), 8 deletions(-)
+
+commit 9c9769047d74c0f9a4e9cfcf8ab55ee9b318a4e7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 24 14:34:40 2015 +0200
+
+    fix(test): StyleCompiler tests failing in Android browsers
+    
+    Closes #4351
+
+ .../angular2/test/compiler/style_compiler_spec.ts  | 40 ++++++++++++----------
+ 1 file changed, 21 insertions(+), 19 deletions(-)
+
+commit bffa2cb59bdeaf0e5c5e853824032c788a30c53a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Sep 18 00:49:56 2015 +0200
+
+    feat(animate): cross-browser compatibility
+    
+    Closes #4243
+
+ modules/angular2/src/animate/animation.ts          | 28 ++++++++++----
+ modules/angular2/src/core/dom/dom_adapter.ts       |  3 ++
+ .../src/core/dom/generic_browser_adapter.ts        | 44 +++++++++++++++++++++-
+ modules/angular2/src/core/dom/html_adapter.dart    | 12 ++++++
+ modules/angular2/src/core/dom/parse5_adapter.ts    |  3 ++
+ .../test/animate/animation_builder_spec.ts         | 34 ++++++++++++-----
+ 6 files changed, 105 insertions(+), 19 deletions(-)
+
+commit 4f56a01b3b9ac7edf8ebaa1e86425808920c2370
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Sep 18 00:49:10 2015 +0200
+
+    fix(shims): add requestAnimationFrame shim for IE9 and Android
+    
+    Fixes #4209
+
+ modules/angular2/src/test_lib/shims_for_IE.js | 35 +++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+commit 29f75c3c63311f507088fc370ee75e9dbec48dad
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Sep 18 14:54:01 2015 +0200
+
+    chore(saucelabs): MdButton tests time out
+    
+    Closes #4248
+
+ modules/angular2_material/test/button_spec.ts | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 390aacd4428270e34b2a4731fe66232c5388a0c9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 17 00:35:59 2015 +0200
+
+    fix(facade): workaround for lack of Symbol.iterator in es6-shim
+    
+    Closes #4219
+    Fixes #4216
+
+ modules/angular2/src/core/compiler/query_list.ts    |  4 +++-
+ modules/angular2/src/core/facade/collection.ts      | 15 +++++++++++----
+ modules/angular2/src/core/facade/lang.ts            | 21 +++++++++++++++++++++
+ .../angular2/test/core/change_detection/iterable.ts |  3 ++-
+ 4 files changed, 37 insertions(+), 6 deletions(-)
+
+commit e166f6fe95fdae4b2e48565e1b1afdbd4bef4aa2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 16 23:50:03 2015 +0200
+
+    fix(browser): make Firefox to work with es6-shim
+    
+    es6-shim.js must be loaded first
+
+ karma-js.conf.js                                             | 5 +++--
+ tools/broccoli/html-replace/SCRIPTS.html                     | 2 +-
+ tools/broccoli/html-replace/SCRIPTS_benchmarks.html          | 2 +-
+ tools/broccoli/html-replace/SCRIPTS_benchmarks_external.html | 2 +-
+ tools/broccoli/js-replace/SCRIPTS.js                         | 2 +-
+ tools/broccoli/trees/browser_tree.ts                         | 4 ++--
+ 6 files changed, 9 insertions(+), 8 deletions(-)
+
+commit f7b6ff05203f6aa6fef92c4d3d92559fa0f5d768
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 9 16:41:11 2015 +0200
+
+    chore(build): improve reliability of the saucelabs job
+    
+    Closes #4091
+    Closes #4047
+
+ modules/angular2/src/test_lib/test_lib.ts          |   7 +-
+ modules/angular2/src/test_lib/utils.ts             |   6 ++
+ .../angular2/test/compiler/style_compiler_spec.ts  |   6 +-
+ modules/angular2/test/core/zone/ng_zone_spec.ts    | 102 +++++++++++----------
+ .../test/router/integration/lifecycle_hook_spec.ts |  26 +++---
+ .../router/integration/router_integration_spec.ts  |  11 +--
+ .../test/router/integration/router_link_spec.ts    |   4 +-
+ modules/angular2/test/router/location_spec.ts      |   2 +-
+ modules/angular2/test/router/route_config_spec.ts  |   8 +-
+ modules/angular2/test/test_lib/utils_spec.ts       |  32 +++++++
+ .../test/web_workers/shared/message_bus_spec.ts    |   8 +-
+ 11 files changed, 126 insertions(+), 86 deletions(-)
+
+commit df7f59b3a814754e2107ed89fe13f6274b598d19
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 9 15:21:02 2015 +0200
+
+    fix(test): do not set ng.probe when ng is null or undefined
+
+ modules/angular2/src/core/facade/lang.ts | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit abc4ef31e2a80c1fd300f20da660b67031995bb4
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 9 12:23:04 2015 +0200
+
+    fix(test): AngularProfiler should check before using modern APIs
+
+ modules/angular2/src/core/dom/browser_adapter.dart |  4 ++++
+ modules/angular2/src/core/dom/browser_adapter.ts   | 17 ++++++++++++++++-
+ modules/angular2/src/core/dom/dom_adapter.ts       |  1 +
+ modules/angular2/src/core/dom/html_adapter.dart    |  4 ++++
+ modules/angular2/src/core/dom/parse5_adapter.ts    |  9 ++++++++-
+ modules/angular2/src/tools/common_tools.ts         | 13 ++++++++-----
+ 6 files changed, 41 insertions(+), 7 deletions(-)
+
+commit 55290b9b21450727a6e2283a4d29c32fa3428891
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Sep 9 12:18:22 2015 +0200
+
+    fix(test): PostMessageBusSink tests failing in slow browsers
+
+ modules/angular2/test/web_workers/shared/message_bus_spec.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit d6464633faa3f91176b8721fb5fa6b931966855a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 8 17:36:59 2015 +0200
+
+    fix(test): StyleCompiler tests failing in Android browsers
+
+ .../angular2/test/compiler/style_compiler_spec.ts  | 31 +++++++++++++++-------
+ 1 file changed, 22 insertions(+), 9 deletions(-)
+
+commit c83207f2316b0cd2a42dc5d5e0c556714fbc5d56
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 8 13:50:28 2015 +0200
+
+    fix(test): Android browser does not support element.click()
+
+ modules/angular2/test/core/compiler/integration_spec.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3a7b50f244a1b118518b632e1e253fb80a46637a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 8 12:38:19 2015 +0200
+
+    fix(shims): function.name to return empty string when no name
+
+ modules/angular2/src/test_lib/shims_for_IE.js |  3 ++-
+ modules/angular2/test/core/dom/shim_spec.dart |  5 +++++
+ modules/angular2/test/core/dom/shim_spec.ts   | 26 ++++++++++++++++++++++++++
+ 3 files changed, 33 insertions(+), 1 deletion(-)
+
+commit 4c2fb1f6e8c4f46542778838293853eca674e770
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Sep 10 18:32:28 2015 +0200
+
+    chore(package.json): update karma-jasmine
+    
+    Closes #4116
+
+ npm-shrinkwrap.clean.json |   6 +-
+ npm-shrinkwrap.json       | 362 +++++++++++++++++++++++-----------------------
+ package.json              |   2 +-
+ 3 files changed, 187 insertions(+), 183 deletions(-)
+
+commit 9b009b3159f6da9e2a9e110c3bfb5d16e296ff17
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Sep 1 17:31:05 2015 +0200
+
+    chore(DEVELOPER.md): add details for configuring Dart on Windows
+    
+    Follows #3865
+    Closes #3939
+
+ DEVELOPER.md | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+commit be0739085976bbdbcf8f560475e87b07343f464d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 24 15:41:36 2015 +0200
+
+    refactor(test_lib): BrowserDetection util
+    
+    Closes #3805
+
+ modules/angular2/src/test_lib/utils.ts             |  59 ++++---
+ .../core/render/dom/compiler/shadow_css_spec.ts    |   6 +-
+ modules/angular2/test/core/zone/ng_zone_spec.ts    |   7 +-
+ modules/angular2/test/forms/integration_spec.ts    |   4 +-
+ modules/angular2/test/pipes/async_pipe_spec.ts     |   5 +-
+ modules/angular2/test/pipes/date_pipe_spec.ts      |   4 +-
+ modules/angular2/test/pipes/number_pipe_spec.ts    |   4 +-
+ modules/angular2/test/test_lib/utils_spec.ts       | 172 +++++++++++++++++++++
+ 8 files changed, 223 insertions(+), 38 deletions(-)
+
+commit 557d309377683fd5c37f05178054bb08e8ac1e97
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 26 16:45:03 2015 +0200
+
+    chore(build): improve reliability of the saucelabs job
+    
+    Closes #3848
+
+ modules/angular2/test/core/zone/ng_zone_spec.ts    | 28 +++++++--------
+ .../test/router/integration/lifecycle_hook_spec.ts | 26 +++++++-------
+ .../router/integration/router_integration_spec.ts  | 41 +++++++++++-----------
+ .../test/router/integration/router_link_spec.ts    |  4 +--
+ modules/angular2/test/router/location_spec.ts      |  2 +-
+ .../test/web_workers/shared/message_bus_spec.ts    |  2 +-
+ 6 files changed, 52 insertions(+), 51 deletions(-)
+
+commit e72305e685d8e4c9e66a77696b1e18470916b76e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 25 19:51:57 2015 +0200
+
+    fix(build): do not run build/pubbuild.dart twice
+    
+    Closes #3831
+
+ scripts/ci/test_e2e_dart.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c2279dd651d53235a16978a689455aafd684bfed
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 24 19:13:47 2015 +0200
+
+    fix(build): make e2e tests faster
+    
+    Closes #3822
+
+ modules/benchmarks/src/naive_infinite_scroll/index.html         | 2 +-
+ modules/examples/e2e_test/message_broker/message_broker_spec.ts | 1 +
+ protractor-shared.js                                            | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+commit bf4b75ee9c8a3af896d1921462902bb4dad3da3d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 24 16:24:34 2015 +0200
+
+    fix(build): error when running `npm test` locally
+    
+    Closes #3806
+
+ gulpfile.js | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 377e3ac962798503128985b1943cceb24df57ff3
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Aug 24 11:21:16 2015 +0200
+
+    chore(build): add mode Safari versions to CI
+    
+    Close #3802
+
+ sauce.conf.js | 28 +++++++++++-----------------
+ 1 file changed, 11 insertions(+), 17 deletions(-)
+
+commit 50eee4266836b66145765113851df5d445f948bb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 20 18:23:57 2015 +0200
+
+    chore(build): add Android to CI
+    
+    Closes #3756
+
+ modules/angular2/src/dom/browser_adapter.ts     | 13 +++++++++++--
+ modules/angular2/src/test_lib/utils.ts          | 16 ++++++++++++++--
+ modules/angular2/test/core/zone/ng_zone_spec.ts | 11 ++++++-----
+ sauce.conf.js                                   |  3 ++-
+ 4 files changed, 33 insertions(+), 10 deletions(-)
+
+commit 65344fcac9e7069e7c01f48dd15b6737ecf2d417
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 20 14:34:01 2015 +0200
+
+    chore(build): add IE9 to CI
+    
+    Closes #3747
+
+ modules/angular2/src/test_lib/shims_for_IE.js     | 15 +++++-
+ modules/angular2/test/core/zone/ng_zone_spec.ts   | 14 +++---
+ modules/angular2/test/router/location_spec.ts     |  2 +-
+ modules/angular2/test/router/outlet_spec.ts       | 58 +++++++++++------------
+ modules/angular2/test/router/route_config_spec.ts |  8 ++--
+ sauce.conf.js                                     |  2 +-
+ 6 files changed, 56 insertions(+), 43 deletions(-)
+
+commit b0d27ee896cfeaa4a290bd4fed26086956522cd1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 20 10:12:46 2015 +0200
+
+    chore(build): add IE10 to CI
+
+ modules/angular2/src/dom/browser_adapter.ts             | 6 ++++--
+ modules/angular2/test/core/compiler/integration_spec.ts | 9 +++++----
+ sauce.conf.js                                           | 2 +-
+ 3 files changed, 10 insertions(+), 7 deletions(-)
+
+commit 9ba2ab5ceaab60b48a8eb830601abf2cef05ecea
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 20 10:02:42 2015 +0200
+
+    chore(build): add IE11 to CI
+
+ karma-js.conf.js                                |  4 +-
+ modules/angular2/src/test_lib/shims_for_IE.dart |  1 -
+ modules/angular2/src/test_lib/shims_for_IE.js   | 87 +++++++++++++++++++++++++
+ modules/angular2/src/test_lib/shims_for_IE.ts   | 13 ----
+ sauce.conf.js                                   |  2 +-
+ 5 files changed, 90 insertions(+), 17 deletions(-)
+
+commit 1c9be9b5aabcf27a45f1528c7e47d028eff0a85e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 19 16:47:18 2015 +0200
+
+    chore(build): add Firefox to CI
+
+ modules/angular2/src/test_lib/utils.ts          |  5 +++++
+ modules/angular2/test/forms/integration_spec.ts | 10 +++++++++-
+ sauce.conf.js                                   |  2 +-
+ 3 files changed, 15 insertions(+), 2 deletions(-)
+
+commit 49997ca9324cb5383c759beaf6776bba80e426a0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 19 11:01:00 2015 +0200
+
+    chore(build): add iOS8 to CI
+
+ sauce.conf.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6b38d249c5ab2af9fe83e83edc20a437b7c03fc7
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Aug 19 10:59:28 2015 +0200
+
+    chore(build): add Safari8 to CI
+    
+    Closes #3717
+
+ sauce.conf.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 873b6da120542759ba4ee1f9659a4422b334068f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 18 16:16:30 2015 +0200
+
+    chore(test): disable tests based on Intl API in non-Chrome browsers
+    
+    Closes #3692
+
+ modules/angular2/src/pipes/date_pipe.ts         |  3 +
+ modules/angular2/src/pipes/number_pipe.ts       |  9 +++
+ modules/angular2/src/test_lib/utils.ts          |  7 ++
+ modules/angular2/test/pipes/date_pipe_spec.ts   | 84 +++++++++++++----------
+ modules/angular2/test/pipes/number_pipe_spec.ts | 90 ++++++++++++++-----------
+ 5 files changed, 120 insertions(+), 73 deletions(-)
+
+commit 3b4965279c4f7a876317b5b71cd95ce30afc47a0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Sun Aug 16 01:30:18 2015 +0200
+
+    feat(browser): support Edge
+    
+    Closes #3667
+
+ modules/angular2/src/facade/collection.ts                    |  2 +-
+ modules/angular2/test/core/zone/ng_zone_spec.ts              | 11 ++++++-----
+ modules/angular2/test/render/dom/compiler/shadow_css_spec.ts |  3 ++-
+ 3 files changed, 9 insertions(+), 7 deletions(-)
+
+commit 914ca88e5dbc680bd9a2f5047e18618202a99298
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Aug 18 13:46:23 2015 +0200
+
+    chore(build): enable SauceLabs job
+    
+    Closes #3690
+
+ .travis.yml   | 3 +--
+ sauce.conf.js | 4 ++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+commit a37de36fa672d83cd32e326894b3a60a5fbb383a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Aug 6 12:28:36 2015 +0200
+
+    fix(test_lib): run unit tests in default Documnent
+    
+    Closes #3501
+    Fixes #3475
+
+ modules/angular2/src/test_lib/test_component_builder.ts | 4 ++++
+ modules/angular2/src/test_lib/test_injector.ts          | 2 +-
+ modules/angular2/test/forms/integration_spec.ts         | 6 ------
+ 3 files changed, 5 insertions(+), 7 deletions(-)
+
+commit 166688348a588bea41c42b0a1c5a37dcdca9afdf
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jul 29 18:34:02 2015 +0200
+
+    chore(browsers): fix failing tests in IE11
+    
+    Closes #3388
+
+ modules/angular2/src/dom/browser_adapter.ts        |  2 +-
+ modules/angular2/src/test_lib/utils.ts             |  2 +-
+ modules/angular2/test/core/zone/ng_zone_spec.ts    | 36 ++++++++--------
+ modules/angular2/test/directives/ng_style_spec.ts  | 48 +++++++++++-----------
+ modules/angular2/test/forms/integration_spec.ts    |  6 +++
+ modules/angular2/test/render/dom/view/view_spec.ts |  8 ++--
+ 6 files changed, 54 insertions(+), 48 deletions(-)
+
+commit 12e4c738c9c5461b7586bd375e5f9e659d3ee7d0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jul 30 15:20:08 2015 +0200
+
+    fix(collection): MapIterator.next() is not supported (Safari)
+    
+    Fixes #3015
+    Closes #3389
+
+ modules/angular2/src/facade/collection.ts | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+commit 88224608588f3fca08e606e7884b3c536e11de03
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jul 27 11:47:25 2015 +0200
+
+    chore(browsers): fix failing tests in Firefox
+    
+    Closes #3386
+
+ modules/angular2/src/dom/browser_adapter.dart                |  3 +++
+ modules/angular2/src/dom/browser_adapter.ts                  |  3 +++
+ modules/angular2/src/dom/dom_adapter.ts                      |  1 +
+ modules/angular2/src/dom/html_adapter.dart                   |  3 +++
+ modules/angular2/src/dom/parse5_adapter.ts                   |  1 +
+ modules/angular2/src/render/dom/view/view.ts                 |  2 +-
+ modules/angular2/test/core/compiler/integration_spec.ts      | 12 ++++++------
+ modules/angular2/test/dom/dom_adapter_spec.ts                |  2 +-
+ .../render/dom/view/proto_view_merger_integration_spec.ts    |  4 ++--
+ modules/angular2/test/router/outlet_spec.ts                  |  6 ++----
+ 10 files changed, 23 insertions(+), 14 deletions(-)
+
+commit eebd736cfe557c0d83b59652134d9aaa46476344
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 2 16:29:09 2015 +0200
+
+    feat(build): initial SauceLabs setup
+    
+    Closes #2347
+
+ .travis.yml                                   |  15 ++-
+ gulpfile.js                                   |  53 ++++++++--
+ karma-dart.conf.js                            |   8 +-
+ karma-js.conf.js                              |  37 +++++--
+ modules/angular2/src/test_lib/test_lib.dart   |   6 +-
+ modules/angular2/src/test_lib/test_lib.ts     |  16 +--
+ modules/angular2/test/render/xhr_impl_spec.ts |   4 +-
+ sauce.conf.js                                 | 138 ++++++++++++++++++++++++++
+ scripts/ci/build_and_test.sh                  |  11 +-
+ scripts/ci/test_saucelabs.sh                  |  12 +++
+ scripts/sauce/sauce_connect_block.sh          |  10 ++
+ scripts/sauce/sauce_connect_setup.sh          |  49 +++++++++
+ 12 files changed, 320 insertions(+), 39 deletions(-)
+
+commit abc1580fa9f2046fba5ed4ac83992f78de1cdfb2
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jul 7 14:03:03 2015 +0200
+
+    chore(package.json) upgrade zone.js to 0.5.2
+
+ npm-shrinkwrap.clean.json |  2 +-
+ npm-shrinkwrap.json       | 19 ++++++++++---------
+ package.json              |  2 +-
+ 3 files changed, 12 insertions(+), 11 deletions(-)
+
+commit dd7910347a89d8d3cf341ec1fdd6deeb896ccf72
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jun 25 18:29:19 2015 +0200
+
+    chore(windows): fix the test.server.dart task
+    
+    Closes #2703
+
+ modules/angular2/src/transform/reflection_remover/rewriter.dart    | 2 +-
+ modules/angular2/test/transform/directive_processor/all_tests.dart | 2 +-
+ modules/angular2/test/transform/reflection_remover/all_tests.dart  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 65769699b0ce98677af3a75e015319a8a73cc82d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jun 25 16:56:59 2015 +0200
+
+    chore(windows): fix the Dart e2e/benchmark tasks
+
+ protractor-shared.js              | 2 +-
+ tools/broccoli/trees/dart_tree.ts | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 8b685466f5f36ed8ccdfdbe9dd38096f40c09c53
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jun 25 16:56:35 2015 +0200
+
+    chore(windows): fix the JS e2e/benchmark tasks
+
+ tools/broccoli/trees/browser_tree.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 91d9e8d649032ed86a384d657a1e7bf3ae01f36c
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 23 18:52:44 2015 +0200
+
+    chore(windows): fix the test.transpiler.unittest task
+
+ tools/transpiler/unittest/transpilertests.js | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit 746efe7ebac93bc9bfc200605a14a50205fabdb1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 23 18:09:32 2015 +0200
+
+    chore(windows): fix the test.unit.tools task
+
+ tools/broccoli/broccoli-flatten.spec.ts |  4 +++-
+ tools/broccoli/tree-differ.spec.ts      | 16 +++++++++++-----
+ 2 files changed, 14 insertions(+), 6 deletions(-)
+
+commit ecb2bd0cbeb4e39be7bb767ccc695855770c0dcc
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 23 17:18:04 2015 +0200
+
+    chore(windows): fix the build.dart task
+
+ modules/angular2/src/transform/reflection_remover/codegen.dart | 2 +-
+ tools/build/dartanalyzer.js                                    | 6 +++++-
+ tools/build/pubbuild.js                                        | 2 +-
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+
+commit 7e8a2b9cecbe24eaefa6f1695cce10637a8f092e
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 9 17:49:44 2015 +0200
+
+    chore(windows): fix the test.unit.dart task
+    
+    Closes #2676
+
+ tools/build/dartdetect.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 37f8fd6551e3a731895d3c35d5eef5e0085259e5
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 9 13:44:42 2015 +0200
+
+    chore(windows): fix !test.unit.js/karma-run and !test.unit.dart/karma-run tasks
+    
+    Closes #2431
+
+ gulpfile.js | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
+
+commit 1afdb3cbb1909031ae9e790e49e9bfdf17a7a04d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Jun 4 12:34:43 2015 +0200
+
+    chore(package.json): add karma-sauce-launcher to dev dependencies
+    
+    Closes #2342
+
+ npm-shrinkwrap.clean.json | 317 +++++++++++++++++-
+ npm-shrinkwrap.json       | 805 +++++++++++++++++++++++++++++++++++++---------
+ package.json              |   1 +
+ 3 files changed, 964 insertions(+), 159 deletions(-)
+
+commit 4c8e11a57791f2860b9130820f102dca8330f13a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Jun 2 14:59:35 2015 +0200
+
+    fix(ShadowCss): keyframes tests failing in Safari
+    
+    Closes #2283
+
+ .../test/render/dom/shadow_dom/shadow_css_spec.ts  | 22 +++++++++++++---------
+ 1 file changed, 13 insertions(+), 9 deletions(-)
+
+commit c6335c128ed5d7a213756985a7b79f19316903cb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri May 22 17:47:13 2015 +0200
+
+    feat(test_lib): add method to compare stringified DOM element
+    
+    Closes #2106
+
+ modules/angular2/src/facade/collection.dart        |  8 +++-
+ modules/angular2/src/facade/collection.ts          | 10 ++++-
+ modules/angular2/src/test_lib/utils.ts             | 46 +++++++++++++++++++++-
+ .../test/core/compiler/integration_spec.ts         |  7 ++--
+ .../test/render/dom/compiler/view_splitter_spec.ts | 37 ++++++++++-------
+ .../test/render/dom/shadow_dom/light_dom_spec.ts   |  5 ++-
+ 6 files changed, 88 insertions(+), 25 deletions(-)
+
+commit fb42d5908e03b87189f0083beaac67acf0010364
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed May 27 10:22:30 2015 +0200
+
+    fix(test): solve CSS discrepancies across browsers
+    
+    Closes #2177
+
+ modules/angular2/src/test_lib/utils.ts             | 11 +++++
+ .../emulated_scoped_shadow_dom_strategy_spec.ts    |  6 +--
+ .../emulated_unscoped_shadow_dom_strategy_spec.ts  |  3 +-
+ .../test/render/dom/shadow_dom/shadow_css_spec.ts  | 57 ++++++++++++++--------
+ 4 files changed, 51 insertions(+), 26 deletions(-)
+
+commit 4b98ed114e5f13e514647ed5299b9201ab8c3eec
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri May 22 12:43:48 2015 +0200
+
+    fix(collection): iterator on Map keys is not supported (Safari)
+    
+    Closes #2096
+
+ modules/angular2/src/facade/collection.ts | 23 ++++++++++++++++-------
+ 1 file changed, 16 insertions(+), 7 deletions(-)
+
+commit d308e55e127386ad789e0aad51bfaa203fee06cb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri May 22 12:42:24 2015 +0200
+
+    fix(collection): new Map(iterable) is not supported (Safari)
+
+ modules/angular2/src/facade/collection.ts | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+commit 57b88ec2d6abec8797f38a72c3d3e28da21d0b91
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 18:18:19 2015 +0200
+
+    fix(collection): new Set(iterable) is not supported (IE11, Safari)
+    
+    Closes #2063
+
+ modules/angular2/src/facade/collection.ts | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+commit 588fbfd8486f80c795b76228613646a95cd7a94a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 17:12:10 2015 +0200
+
+    fix(test): use a not expandable CSS rule in ShadowCSS spec (Firefox)
+    
+    Closes #2061
+
+ .../test/render/dom/shadow_dom/shadow_css_spec.js        | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit b2a24e021f405b095c491ebcb150d2ff50023ac0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 17:09:48 2015 +0200
+
+    fix(browser_adapter): HTMLStyleElement.innerText does not trigger creation of CSS rules (Firefox)
+
+ modules/angular2/src/dom/browser_adapter.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 661a04798e86038373e2c19e6ce3663f1d9328b4
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:54:31 2015 +0200
+
+    fix(test): adds longer timers for NgZone and PromisePipe tests (IE11)
+    
+    Closes #2055
+
+ modules/angular2/src/dom/browser_adapter.dart      |  3 ++
+ modules/angular2/src/dom/browser_adapter.ts        |  3 ++
+ modules/angular2/src/dom/dom_adapter.ts            |  1 +
+ modules/angular2/src/dom/html_adapter.dart         |  3 ++
+ modules/angular2/src/dom/parse5_adapter.cjs        |  3 ++
+ .../change_detection/pipes/promise_pipe_spec.js    | 13 +++++---
+ modules/angular2/test/core/zone/ng_zone_spec.js    | 38 ++++++++++++----------
+ 7 files changed, 41 insertions(+), 23 deletions(-)
+
+commit 665ccafd73ea8dda92afd96995b0d6746d19a651
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:51:48 2015 +0200
+
+    fix(browser_adapter): event creation fails (IE11, Firefox)
+
+ modules/angular2/src/dom/browser_adapter.ts | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit f35dbb99b5e41fd3c84f238da8671ed4741b0cd0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:50:04 2015 +0200
+
+    fix(browser_adapter): element.getBoundingClientRect fails when element not in DOM (IE11)
+
+ modules/angular2/src/dom/browser_adapter.ts | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit a393f84fa417b02e20275ef3e374c61db3d95a81
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:48:51 2015 +0200
+
+    fix(browser_adapter): element.matches only available with prefix (IE11)
+
+ modules/angular2/src/dom/browser_adapter.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 92c2c33a8452033b1dc73ac087d0636ff4ca4dda
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:47:12 2015 +0200
+
+    fix(browser_adapter): assigning null to document.title sets the title to "null" (IE11, Firefox)
+
+ modules/angular2/src/dom/browser_adapter.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9802debf71ff68897c1be59e1763dd31bcbde8ed
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:35:53 2015 +0200
+
+    fix(test): native shadow DOM is required (IE11, Firefox)
+
+ .../render/dom/shadow_dom/native_shadow_dom_strategy_spec.js   | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+commit 2287938f5a09205701d2d73263b00a8e6d323243
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:32:29 2015 +0200
+
+    fix(router): event.defaultPrevented is not reliable (IE11)
+
+ modules/angular2/src/dom/browser_adapter.dart | 3 +++
+ modules/angular2/src/dom/browser_adapter.ts   | 4 ++++
+ modules/angular2/src/dom/dom_adapter.ts       | 1 +
+ modules/angular2/src/dom/html_adapter.dart    | 3 +++
+ modules/angular2/src/dom/parse5_adapter.cjs   | 3 +++
+ modules/angular2/src/router/router_link.js    | 2 +-
+ modules/angular2/test/router/outlet_spec.js   | 4 ++--
+ 7 files changed, 17 insertions(+), 3 deletions(-)
+
+commit 5103f080e9f60330c5b259e06a4375d4df3b4d81
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu May 21 11:30:56 2015 +0200
+
+    fix(test): function.name is not available (IE11)
+
+ karma-js.conf.js                               |  3 ++-
+ modules/angular2/src/test_lib/shims_for_IE.es6 | 13 +++++++++++++
+ 2 files changed, 15 insertions(+), 1 deletion(-)
+
+commit c397297eefdf4bb6522287518496f77b13678b71
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed May 13 12:04:10 2015 +0200
+
+    chore(build): fix build.js and test.unit.cjs on Windows
+    
+    Closes #1873
+
+ tools/broccoli/broccoli-typescript.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b71fe311fc8104866d81da0479edf14cee7832ff
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Apr 29 19:32:50 2015 +0200
+
+    chore(build): update clang-format to 1.0.10
+    
+    Closes #1593
+
+ npm-shrinkwrap.clean.json | 2 +-
+ npm-shrinkwrap.json       | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+commit a51a5c29680ffdf4c23dc468ae47ca1d12a561fb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Apr 28 00:23:39 2015 +0200
+
+    chore(build): run forms tests in Node
+    
+    Closes #1565
+
+ modules/angular2/src/forms/directives.js           | 10 ++++++----
+ modules/angular2/src/forms/validator_directives.js |  3 +--
+ tools/broccoli/trees/node_tree.ts                  |  3 +--
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+commit 8a92a1f13e85028a9cfa15cd91b0c6c27f9d48ab
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Apr 22 18:49:28 2015 +0200
+
+    fix(angular2): export QueryList in angular2/core
+    
+    Closes #1502
+
+ modules/angular2/core.js | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 22c6c09dafaca6d9f2300d1807bba847994efe30
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Apr 21 19:30:55 2015 +0200
+
+    chore(build): run event tests in Node
+    
+    Closes #1476
+
+ gulpfile.js                                        |   1 -
+ modules/angular2/src/dom/parse5_adapter.cjs        |  47 +-
+ modules/angular2/src/forms/validator_directives.js |   3 +-
+ .../test/core/compiler/integration_spec.js         | 126 ++---
+ modules/angular2/test/forms/integration_spec.js    | 508 +++++++++++----------
+ .../test/render/dom/events/event_manager_spec.js   |   5 +-
+ 6 files changed, 364 insertions(+), 326 deletions(-)
+
+commit 0a200aff701a88750f1bbc60578ba76fd149db97
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Apr 20 15:30:15 2015 +0200
+
+    chore(doc-gen): fix atScript file reader test
+    
+    Closes #1458
+
+ docs/dgeni-package/readers/atScript.spec.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 883e1c1541faf1fe9433b5110392caf7134b6fc8
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 16 18:03:15 2015 +0200
+
+    feat(events): support preventdefault
+    
+    Fixes #1039
+    Closes #1397
+
+ modules/angular2/docs/core/01_templates.md         |  3 +-
+ .../angular2/src/core/annotations/annotations.js   |  1 +
+ modules/angular2/src/core/compiler/view.js         | 16 +++++----
+ modules/angular2/src/render/dom/view/view.js       |  9 +++--
+ .../test/core/compiler/integration_spec.js         | 41 ++++++++++++++++++++++
+ 5 files changed, 61 insertions(+), 9 deletions(-)
+
+commit aabe83cf6324cf404c94d8d9fc02e9ddc7c28ff9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 16 18:44:34 2015 +0200
+
+    chore(build): run application tests in Node
+    
+    Closes #1423
+
+ gulpfile.js                                               |  1 -
+ modules/angular2/src/core/testability/get_testability.es6 |  9 +++++----
+ modules/angular2/src/dom/parse5_adapter.cjs               | 14 ++++++++++----
+ 3 files changed, 15 insertions(+), 9 deletions(-)
+
+commit d3e391d176882c878a2a587e2badef301c1fdf46
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Apr 14 11:31:35 2015 +0200
+
+    chore(build): run render tests in Node
+    
+    Closes #1358
+
+ gulpfile.js                                               | 15 ++++-----------
+ .../test/render/dom/compiler/directive_parser_spec.js     | 14 ++++++++++----
+ 2 files changed, 14 insertions(+), 15 deletions(-)
+
+commit ff6e7754aeebad475514c5af890a86ed2514a645
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Apr 13 18:59:37 2015 +0200
+
+    chore(build): gulp test.unit.cjs broken the second run
+    
+    Fixes #1311
+    
+    Closes #1333
+
+ gulpfile.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit b96e560c8dc10c18f4010f04f37df91c89a56870
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 2 15:56:58 2015 +0200
+
+    feat(events): add support for global events
+    
+    Fixes #1098
+    Closes #1255
+
+ .../angular2/src/core/annotations/annotations.js   |  12 ++-
+ .../src/core/compiler/proto_view_factory.js        |   8 +-
+ modules/angular2/src/core/compiler/view.js         |  18 ++--
+ modules/angular2/src/dom/browser_adapter.dart      |  15 +++
+ modules/angular2/src/dom/browser_adapter.es6       |  15 +++
+ modules/angular2/src/dom/dom_adapter.js            |   6 ++
+ modules/angular2/src/dom/html_adapter.dart         |   3 +
+ modules/angular2/src/dom/parse5_adapter.cjs        |   3 +
+ modules/angular2/src/mock/vm_turn_zone_mock.js     |   2 +-
+ modules/angular2/src/render/api.js                 |  14 ++-
+ .../src/render/dom/compiler/directive_parser.js    |  12 ++-
+ .../src/render/dom/events/event_manager.js         |  47 +++++++---
+ modules/angular2/src/render/dom/util.js            |   2 +
+ .../angular2/src/render/dom/view/element_binder.js |  21 ++++-
+ .../src/render/dom/view/proto_view_builder.js      | 103 +++++++++++++--------
+ modules/angular2/src/render/dom/view/view.js       |  34 ++++++-
+ .../angular2/src/render/dom/view/view_factory.js   |  10 +-
+ .../test/core/compiler/element_injector_spec.js    |   7 +-
+ .../test/core/compiler/integration_spec.js         |  99 +++++++++++++++++++-
+ .../render/dom/compiler/directive_parser_spec.js   |  27 +++++-
+ .../dom/compiler/property_binding_parser_spec.js   |  20 +++-
+ .../test/render/dom/events/event_manager_spec.js   |  26 +++++-
+ .../test/render/dom/integration_testbed.js         |   1 +
+ .../emulated_scoped_shadow_dom_strategy_spec.js    |   2 +-
+ .../emulated_unscoped_shadow_dom_strategy_spec.js  |   2 +-
+ .../shadow_dom/native_shadow_dom_strategy_spec.js  |   2 +-
+ modules/angular2/test/render/dom/view/view_spec.js |   6 +-
+ 27 files changed, 414 insertions(+), 103 deletions(-)
+
+commit 08697e71fa9f5b84b09cd62adaf8dd0785f8c4d1
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Apr 2 16:22:19 2015 +0200
+
+    chore(package.json): update madge to v0.5.0
+    
+    Closes #1211
+
+ package.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 90d9a1df3fac3feb6c87d9425ed122861b68e54a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Mar 31 22:56:45 2015 +0200
+
+    fix(IE11): first fixes
+    
+    Closes #1179
+
+ modules/angular2/src/dom/browser_adapter.es6 | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+
+commit 1d79d534d91be87b6b4e57d6155b2a6b50452eca
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 19 23:38:48 2015 +0100
+
+    test(selector): add tests with multiple attributes
+    
+    Fixes #1025
+    Closes #1117
+
+ .../core/compiler/pipeline/directive_parser_spec.js  | 13 ++++++++++++-
+ modules/angular2/test/core/compiler/selector_spec.js | 20 ++++++++++++++++++++
+ .../render/dom/compiler/directive_parser_spec.js     | 14 ++++++++++++++
+ .../test/render/dom/compiler/selector_spec.js        | 20 ++++++++++++++++++++
+ 4 files changed, 66 insertions(+), 1 deletion(-)
+
+commit d8227932299d9a8bfbf8f4fb5b2acf4b368da919
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 26 10:59:52 2015 +0100
+
+    fix(test): add a test for @PropertySetter on a class with a dash
+    
+    Closes #1113
+    Fixes #1099
+
+ modules/angular2/test/core/compiler/element_injector_spec.js | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+commit 0ae33b7e3cfee3c5f07a27091528d29ab66c5ad3
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 26 11:40:40 2015 +0100
+
+    refactor(compiler): factorize common util code dash <-> camel
+    
+    Closes #1114
+    Fixes #1097
+
+ .../src/core/compiler/pipeline/compile_element.js        |  2 +-
+ .../src/core/compiler/pipeline/element_binder_builder.js |  2 +-
+ .../src/core/compiler/property_setter_factory.js         | 16 +---------------
+ .../core/compiler/{pipeline/util.js => string_utils.js}  |  4 ++--
+ 4 files changed, 5 insertions(+), 19 deletions(-)
+
+commit b1dc6239efca8a101c13f20b88247e48c3eec5d6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 25 09:42:19 2015 +0100
+
+    feat(core): @Attribute annotation
+    
+    Closes #1091
+    Fixes #622
+
+ modules/angular2/src/core/annotations/di.js        | 12 ++++++++
+ .../angular2/src/core/compiler/element_injector.js | 22 +++++++++++--
+ .../src/core/compiler/pipeline/compile_element.js  |  8 +++++
+ .../compiler/pipeline/property_binding_parser.js   |  2 ++
+ .../pipeline/proto_element_injector_builder.js     |  1 +
+ modules/angular2/src/di/binding.js                 |  2 ++
+ .../test/core/compiler/element_injector_spec.js    | 31 +++++++++++++++++--
+ .../test/core/compiler/integration_spec.js         | 36 +++++++++++++++++++++-
+ .../pipeline/property_binding_parser_spec.js       |  6 ++++
+ 9 files changed, 114 insertions(+), 6 deletions(-)
+
+commit 58dd75a1c8abfa8396ead9b2b1c95dc6c6558668
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 23 14:13:32 2015 +0100
+
+    feat(compiler): Add support for setting attributes to Component host element
+    
+    Fixes #1008
+    Fixes #1009
+    Closes #1052
+
+ .../angular2/src/core/compiler/element_injector.js |   4 +-
+ .../compiler/pipeline/element_binder_builder.js    | 115 +----------------
+ .../src/core/compiler/property_setter_factory.js   | 138 +++++++++++++++++++++
+ .../test/core/compiler/element_injector_spec.js    |  37 +++++-
+ .../core/compiler/property_setter_factory_spec.js  |  78 ++++++++++++
+ 5 files changed, 256 insertions(+), 116 deletions(-)
+
+commit 41b53e71e15836ca8a92dd2afee90c01a1832ea5
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 19 17:01:42 2015 +0100
+
+    feat(selector): support , for multiple targets
+    
+    Fixes #867
+    Closes #1019
+
+ .../angular2/src/core/annotations/annotations.js   |   2 +-
+ .../src/core/compiler/pipeline/directive_parser.js |   4 +-
+ modules/angular2/src/core/compiler/selector.js     |  71 +++++++--
+ modules/angular2/src/dom/parse5_adapter.cjs        |   4 +-
+ .../angular2/test/core/compiler/selector_spec.js   | 172 +++++++++++++--------
+ .../benchmarks/src/compiler/selector_benchmark.js  |   6 +-
+ 6 files changed, 172 insertions(+), 87 deletions(-)
+
+commit 02aa8e794579ba8e19c2296d92e86513afe112bb
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Mar 20 17:20:26 2015 +0100
+
+    feat(compiler): support bindings for any attribute
+    
+    Closes #1029
+
+ .../compiler/pipeline/element_binder_builder.js    | 51 ++++++++++------------
+ .../test/core/compiler/integration_spec.js         |  2 +-
+ .../pipeline/element_binder_builder_spec.js        | 33 ++++++++++++--
+ 3 files changed, 54 insertions(+), 32 deletions(-)
+
+commit 2ff2ce3c6c68ccf4636abc41d02317906aed0e38
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 19 11:35:48 2015 +0100
+
+    refactor(test_lib): remove IS_NODEJS
+    
+    Closes #1015
+
+ modules/angular2/src/dom/browser_adapter.es6       |  2 +-
+ modules/angular2/src/dom/dom_adapter.js            |  9 ++++++
+ .../angular2/src/dom/generic_browser_adapter.js    | 11 ++++++-
+ modules/angular2/src/dom/html5lib_adapter.dart     |  9 ++++++
+ modules/angular2/src/dom/parse5_adapter.cjs        | 13 ++++++--
+ modules/angular2/src/facade/lang.dart              |  1 +
+ modules/angular2/src/facade/lang.es6               |  4 +++
+ modules/angular2/src/test_lib/test_lib.dart        |  5 ++-
+ modules/angular2/src/test_lib/test_lib.es6         | 36 ++++++++++++----------
+ .../core/compiler/shadow_dom/shadow_css_spec.js    | 17 +++++-----
+ .../shadow_dom_emulation_integration_spec.js       |  3 +-
+ modules/angular2/test/core/compiler/view_spec.js   |  4 +--
+ modules/angular2/test/forms/integration_spec.js    | 10 +++---
+ package.json                                       |  2 +-
+ 14 files changed, 82 insertions(+), 44 deletions(-)
+
+commit ab5ed6f2ece6271fc3f304d64231fea3587fcb23
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 19 14:21:45 2015 +0100
+
+    chore(test): clean tests of if directive
+    
+    Closes #1017
+
+ modules/angular2/test/directives/if_spec.js | 39 +----------------------------
+ 1 file changed, 1 insertion(+), 38 deletions(-)
+
+commit 52bf0def4e9f5202be1682e39a89472f931eba39
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Mar 18 00:43:30 2015 +0100
+
+    chore(test): improve test.unit.cjs task
+    
+    Closes #998
+
+ DEVELOPER.md                                   |  2 +-
+ gulpfile.js                                    | 31 ++++++++++++++++++++++++--
+ scripts/ci/test_unit_js.sh                     |  2 +-
+ tools/transpiler/index.js                      | 10 +++++----
+ tools/transpiler/karma-traceur-preprocessor.js |  2 +-
+ 5 files changed, 38 insertions(+), 9 deletions(-)
+
+commit a46af9c41c3a3afdd513bafb4cb2fa68453c2d0d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 16 18:48:14 2015 +0100
+
+    feat(build): check circular depencies in Node.js
+    
+    Closes #980
+
+ gulpfile.js                                         | 21 +++++++++++++++++++++
+ .../angular2/src/core/compiler/element_binder.js    |  4 ++--
+ .../src/core/compiler/pipeline/compile_element.js   |  4 ++--
+ .../src/core/compiler/pipeline/compile_step.js      |  4 ++--
+ .../angular2/src/core/compiler/view_container.js    |  8 ++++----
+ package.json                                        |  1 +
+ 6 files changed, 32 insertions(+), 10 deletions(-)
+
+commit 46b03a524e101c7a7ddf7816e552f2c9061df288
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Mar 17 13:51:20 2015 +0100
+
+    feat(test): more tests in Node.js
+
+ gulpfile.js                                 | 10 +++++++++-
+ modules/angular2/src/dom/parse5_adapter.cjs |  7 +++++++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+commit e8965656a47dedd34db377af6228b284fcc0df63
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 9 17:41:49 2015 +0100
+
+    feat(directives/forms): run tests in NodeJS
+    
+    Closes #921
+
+ gulpfile.js                                     |  12 +-
+ modules/angular2/src/dom/parse5_adapter.cjs     |  53 ++++--
+ modules/angular2/src/forms/form_builder.js      |  16 +-
+ modules/angular2/src/forms/validators.js        |  10 +-
+ modules/angular2/test/directives/if_spec.js     |  28 ++--
+ modules/angular2/test/forms/integration_spec.js | 211 ++++++++++++------------
+ 6 files changed, 184 insertions(+), 146 deletions(-)
+
+commit 8d2ee6bbdab337347a175ae17451648d7aea81b0
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 12 09:44:49 2015 +0100
+
+    feat(selector): add support for :not
+    
+    Fixes #609
+    Closes #948
+
+ modules/angular2/src/core/compiler/selector.js     | 90 +++++++++++++++------
+ .../angular2/test/core/compiler/selector_spec.js   | 92 +++++++++++++++++-----
+ 2 files changed, 139 insertions(+), 43 deletions(-)
+
+commit c67194a3efb742ca255569c37153914877901401
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Mar 12 11:16:47 2015 +0100
+
+    fix(test_lib): remove getDistributedNodes emulation in NodeJS
+
+ modules/angular2/src/test_lib/test_lib.es6         | 32 +++-------------------
+ .../shadow_dom_emulation_integration_spec.js       | 15 ++++++----
+ 2 files changed, 13 insertions(+), 34 deletions(-)
+
+commit 1d4ff9bcdcb6dd4e033a4404261b15b13a32c44f
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Sun Mar 1 22:17:36 2015 +0100
+
+    feat(compiler): parse5 DOM adapter
+    
+    Closes #841
+
+ README.md                                          |   5 +-
+ gulpfile.js                                        |  10 +-
+ .../compiler/pipeline/element_binder_builder.js    |   4 +-
+ modules/angular2/src/dom/parse5_adapter.cjs        | 454 +++++++++++++++++++++
+ modules/angular2/src/test_lib/test_lib.dart        |   1 +
+ modules/angular2/src/test_lib/test_lib.es6         |  82 ++--
+ .../test/core/compiler/integration_spec.js         |  23 +-
+ .../core/compiler/shadow_dom/shadow_css_spec.js    |  17 +-
+ .../test/core/compiler/shadow_dom_strategy_spec.js |   4 +-
+ modules/angular2/test/core/compiler/view_spec.js   | 142 +++----
+ package.json                                       |   2 +
+ scripts/ci/test_unit_js.sh                         |   1 +
+ tools/build/transformCJSTests.js                   |  16 +
+ 13 files changed, 634 insertions(+), 127 deletions(-)
+
+commit 537f943f57f1fa6da4f02c0beb67a34bb6cab091
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 9 11:35:46 2015 +0100
+
+    refactor(compiler): remove direct accesses to DOM
+    
+    Closes #898
+
+ .../compiler/shadow_dom_emulation/shadow_css.js    | 22 +------------
+ modules/angular2/src/core/compiler/url_resolver.js |  8 ++---
+ modules/angular2/src/dom/browser_adapter.dart      |  8 +++--
+ modules/angular2/src/dom/browser_adapter.es6       |  8 +++--
+ modules/angular2/src/dom/dom_adapter.js            |  9 ++++++
+ .../angular2/src/dom/generic_browser_adapter.js    | 37 ++++++++++++++++++++++
+ modules/angular2/src/dom/html5lib_adapter.dart     |  9 ++++++
+ 7 files changed, 72 insertions(+), 29 deletions(-)
+
+commit 5acde20c7d5cb8e2970eb87082d37f07766d3c27
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 9 11:37:59 2015 +0100
+
+    refactor(compiler): remove direct accesses to DOM in tests
+    
+    Closes #899
+
+ .../pipeline/element_binder_builder_spec.js        | 22 +++++++++++-----------
+ .../test/core/compiler/pipeline/pipeline_spec.js   |  8 ++++----
+ .../proto_element_injector_builder_spec.js         |  7 ++++---
+ .../compiler/pipeline/proto_view_builder_spec.js   |  5 +++--
+ .../core/compiler/pipeline/view_splitter_spec.js   |  5 +++--
+ .../angular2/test/core/compiler/selector_spec.js   |  3 ++-
+ .../test/core/compiler/template_loader_spec.js     |  7 ++++---
+ modules/angular2/test/core/compiler/view_spec.js   |  2 +-
+ 8 files changed, 32 insertions(+), 27 deletions(-)
+
+commit f1f06018c17ec6e09a4b3b1a0249a5164c5aefe6
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Mar 9 11:33:35 2015 +0100
+
+    fix(compiler): workaround for circular dependencies in nodejs
+    
+    Closes #897
+
+ modules/angular2/src/core/compiler/element_injector.js       |  8 ++++----
+ .../src/core/compiler/shadow_dom_emulation/content_tag.js    |  8 ++++----
+ .../src/core/compiler/shadow_dom_emulation/light_dom.js      | 10 +++++-----
+ modules/angular2/src/core/compiler/shadow_dom_strategy.js    | 12 ++++++------
+ 4 files changed, 19 insertions(+), 19 deletions(-)
+
+commit 85211f0a6bf5101bc2a1e4bee2d1b6e3cb328842
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 19 18:14:29 2015 +0100
+
+    fix(core): workaround for circular dependencies in nodejs
+    
+    Closes #716
+
+ .../angular2/src/core/compiler/view_container.js   | 28 +++++++++++-----------
+ modules/angular2/src/core/compiler/view_pool.js    |  8 +++----
+ .../src/outputgeneration/DartParseTreeWriter.js    |  6 +++++
+ 3 files changed, 24 insertions(+), 18 deletions(-)
+
+commit 89b3995756587cca4ebea66daefbe69c9a58a573
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 19 11:18:23 2015 +0100
+
+    refactor(core): remove direct accesses to DOM
+    
+    Closes #713
+
+ .../src/core/compiler/pipeline/compile_pipeline.js |  6 ++--
+ .../src/core/compiler/pipeline/directive_parser.js |  6 ++--
+ .../compiler/pipeline/text_interpolation_parser.js |  8 +++---
+ .../src/core/compiler/pipeline/view_splitter.js    | 14 +++++----
+ modules/angular2/src/core/compiler/view.js         |  8 +++---
+ modules/angular2/src/facade/dom.dart               | 19 +++++++++++++
+ modules/angular2/src/facade/dom.es6                | 33 ++++++++++++++++++++++
+ modules/angular2/src/forms/directives.js           |  8 +++---
+ modules/angular2/src/test_lib/benchmark_util.js    |  5 ++--
+ modules/angular2/src/test_lib/test_lib.es6         |  4 +--
+ modules/angular2/src/test_lib/utils.js             |  2 +-
+ 11 files changed, 84 insertions(+), 29 deletions(-)
+
+commit 3496c8ac546a5e8aa32ceefa37e2c18213832583
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 19 10:15:06 2015 +0100
+
+    refactor(change_detection): remove circular dependencies
+    
+    Closes #712
+
+ .../change_detection_jit_generator.es6             |  5 +-
+ .../src/change_detection/change_detection_util.js  |  2 +-
+ modules/angular2/src/change_detection/coalesce.js  |  2 +-
+ .../change_detection/dynamic_change_detector.js    |  5 +-
+ .../angular2/src/change_detection/exceptions.js    |  2 +-
+ .../src/change_detection/proto_change_detector.js  | 72 ++++------------------
+ .../angular2/src/change_detection/proto_record.js  | 60 ++++++++++++++++++
+ .../test/change_detection/coalesce_spec.js         |  2 +-
+ 8 files changed, 81 insertions(+), 69 deletions(-)
+
+commit 0499eeb231bfc45b9682cd81cedac9a67e449d46
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Tue Feb 10 07:39:29 2015 +0100
+
+    refactor(facade): remove dependency to rtts_assert
+    
+    Closes #593
+
+ modules/angular2/src/facade/lang.es6                               | 2 --
+ modules/angular2/src/test_lib/test_lib.es6                         | 1 +
+ modules/angular2/test/core/compiler/element_injector_spec.js       | 4 ++--
+ modules/angular2/test/core/compiler/shadow_dom/content_tag_spec.js | 4 ++--
+ modules/angular2/test/core/compiler/shadow_dom/light_dom_spec.js   | 4 ++--
+ modules/angular2/test/core/compiler/view_pool_spec.js              | 4 ++--
+ modules/angular2/test/core/compiler/view_spec.js                   | 4 ++--
+ modules/angular2/test/core/compiler/viewport_spec.js               | 4 ++--
+ modules/angular2/test/test_lib/test_lib_spec.js                    | 4 ++--
+ 9 files changed, 15 insertions(+), 16 deletions(-)
+
+commit 6d8ccaa8e4e2e928db70fbac6b33ccf48e500ed4
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 11 01:03:11 2015 +0100
+
+    feat(TemplateConfig): support array of arrays in TemplateConfig directives
+    
+    Fixes #592
+    Closes #600
+
+ .../src/core/compiler/directive_metadata_reader.js      | 17 ++++++++++++++++-
+ .../core/compiler/directive_metadata_reader_spec.js     | 14 +++++++++++++-
+ modules/angular2/test/core/compiler/integration_spec.js |  3 +--
+ 3 files changed, 30 insertions(+), 4 deletions(-)
+
+commit cf169f13a04f4472da05de9ce0da21fef30a789d
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Feb 5 20:13:32 2015 +0100
+
+    fix(compiler): add missing support to string literals
+    
+    Fixes #531
+    Closes #559
+
+ modules/angular2/src/change_detection/parser/parser.js |  4 ++++
+ .../src/core/compiler/pipeline/default_steps.js        |  2 +-
+ .../src/core/compiler/pipeline/directive_parser.js     |  7 +++++--
+ .../core/compiler/pipeline/element_binder_builder.js   | 15 ++++++++++++++-
+ .../test/change_detection/parser/parser_spec.js        |  6 ++++++
+ .../angular2/test/core/compiler/integration_spec.js    | 15 ++++++++++++---
+ .../core/compiler/pipeline/directive_parser_spec.js    | 18 ++++++++++++++++++
+ .../compiler/pipeline/element_binder_builder_spec.js   | 14 +++++++++++++-
+ 8 files changed, 73 insertions(+), 8 deletions(-)
+
+commit 6bfa48bc6415c9c80b53b512e9d14735e4608e3a
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Feb 4 22:27:31 2015 +0100
+
+    refactor(directives): Drop ng- prefix from all angular directives and rename NgRepeat to Foreach
+    
+    fixes #532
+    
+    Closes #539
+
+ modules/angular2/directives.js                     |  8 +--
+ modules/angular2/docs/core/01_templates.md         | 44 ++++++++--------
+ modules/angular2/docs/core/02_directives.md        | 10 ++--
+ modules/angular2/docs/core/10_view.md              | 14 +++---
+ .../src/directives/{ng_repeat.js => foreach.js}    |  8 +--
+ .../angular2/src/directives/{ng_if.js => if.js}    |  6 +--
+ .../{ng_non_bindable.js => non_bindable.js}        |  4 +-
+ .../src/directives/{ng_switch.js => switch.js}     | 58 +++++++++++-----------
+ .../{ng_repeat_spec.js => foreach_spec.js}         | 29 ++++-------
+ .../test/directives/{ng_if_spec.js => if_spec.js}  | 43 +++++++---------
+ ...g_non_bindable_spec.js => non_bindable_spec.js} | 22 +++-----
+ .../{ng_switch_spec.js => switch_spec.js}          | 50 ++++++++-----------
+ .../benchmarks/src/naive_infinite_scroll/app.js    |  8 +--
+ .../benchmarks/src/naive_infinite_scroll/cells.js  |  6 +--
+ .../benchmarks/src/naive_infinite_scroll/index.js  | 16 +++---
+ .../src/naive_infinite_scroll/scroll_area.js       |  6 +--
+ .../src/outputgeneration/DartParseTreeWriter.js    |  2 +-
+ tools/transpiler/unittest/transpilertests.js       |  6 +--
+ 18 files changed, 158 insertions(+), 182 deletions(-)
+
+commit 52d88457c82b27cd73e03e4b7dfa29d4f9262490
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Jan 28 00:42:08 2015 +0100
+
+    fix(NgRepeat): activate index
+
+ modules/core/src/compiler/view.js         | 3 +--
+ modules/core/test/compiler/view_spec.js   | 4 ++--
+ modules/directives/src/ng_repeat.js       | 3 +--
+ modules/directives/test/ng_repeat_spec.js | 7 +++----
+ 4 files changed, 7 insertions(+), 10 deletions(-)
+
+commit 5367749f5481d404b9158fb509064e46f71398e9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Jan 23 18:29:26 2015 +0100
+
+    docs(pipeline): fix some inline doc
+    
+    Closes #463
+
+ modules/core/src/compiler/pipeline/directive_parser.js             | 2 +-
+ modules/core/src/compiler/pipeline/element_binder_builder.js       | 3 +--
+ .../core/src/compiler/pipeline/proto_element_injector_builder.js   | 6 ++++--
+ modules/core/src/compiler/pipeline/proto_view_builder.js           | 7 +++++--
+ 4 files changed, 11 insertions(+), 7 deletions(-)
+
+commit ee99a5a02b7daf637006fb80d699c3bc0f9e2b61
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Fri Nov 7 18:29:19 2014 +0100
+
+    chore: gulpifying the tests
+    
+    Closes #168
+
+ README.md               |  8 ++++----
+ gulpfile.js             | 27 +++++++++++++++++++++++++++
+ scripts/ci/test_unit.sh |  7 +------
+ 3 files changed, 32 insertions(+), 10 deletions(-)
+
+commit d5a12d59ca33ecd00223e644e17fe85f9aa984b9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Wed Dec 17 10:01:08 2014 +0100
+
+    feat(ng-if): an implementation of ng-if
+    
+    Closes #317
+
+ modules/directives/src/ng_if.js       |  30 +++++
+ modules/directives/test/ng_if_spec.js | 217 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 247 insertions(+)
+
+commit 368cc29d480d5dd0a4cf624ab5cf314042487441
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Jan 5 11:58:13 2015 +0100
+
+    fix(gulpfile): fix the pubbuild task on Windows
+    
+    Closes #349
+
+ tools/build/pubbuild.js | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+commit ead2769dd6aff975de9bfdce33d4e89b7f35d980
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Thu Nov 20 08:57:32 2014 +0100
+
+    fix(examples): hello-world app on Windows
+
+ file2modulename.js | 2 +-
+ gulpfile.js        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit e1c84e02f8728f80ad53e9334b6e94bef98dd9a9
+Author: Marc Laval <mlaval@amadeus.com>
+Date:   Mon Oct 27 17:32:55 2014 +0100
+
+    chore: adds Windows support for build
+    
+    Closes #104
+
+ gulpfile.js               | 6 ++++--
+ tools/transpiler/index.js | 3 ++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)

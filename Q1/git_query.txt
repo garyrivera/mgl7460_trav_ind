@@ -1,0 +1,22 @@
+*********** Q1 - Qui sont les développeurs principaux du projet ?***********************
+DEVELOPERS
+git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE;%s;%n| sort | uniq -c | sort -nr' 	--abbrev-commit --date=short  --source --numstat > developers_numstat.csv
+git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE' 		--date=short  --source --before=2014-12-31> source_2014.csv
+git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE'  		--date=short --source --numstat --before=2014-12-31> hostspot2014.csv
+
+************* DATE MAX
+ git log  --pretty=format:'%an;%as;%cn;%cs;%s%N;%cE;%s' --abbrev-commit --date=short  --source > max_date.csv
+
+--grouping commit
+
+git shortlog -s -n --before=2014-12-31 > number_of_commits_by_author_2014.csv
+git shortlog -s -n --before=2015-12-31 > number_of_commits_by_author_2015.csv
+git shortlog -s -n -e --before=2015-12-31 > number_of_commits_by_author_2014_2015.csv
+git shortlog -s -n -e --after=2016-01-01 --before=2016-12-31 > number_of_commits_by_author_2016.csv
+git shortlog -s -n -e --after=2017-01-01 --before=2017-12-31 > number_of_commits_by_author_2017.csv
+git shortlog -s -n -e --after=2018-01-01 --before=2018-12-31 > number_of_commits_by_author_2018.csv
+git shortlog -s -n -e --after=2019-01-01 --before=2019-12-31 > number_of_commits_by_author_2019.csv
+git shortlog -s -n -e --after=2020-01-01  > number_of_commits_by_author_a_ce_jour.csv
+git shortlog -s -n -e  > number_of_commits_by_author.csv
+git shortlog -s -n -e  --before=2016-12-31 > number_of_commits_by_author_2014_2016.csv
+

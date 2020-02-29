@@ -1,0 +1,1 @@
+ # git log --pretty='commit:%H  ad:%cd cd:%cd' --date=short --dirstat=files,10 > dirstat2.txt
