@@ -1,7 +1,10 @@
 *********** Q1 - Qui sont les développeurs principaux du projet ?***********************
 DEVELOPERS
 git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE;%s;%n| sort | uniq -c | sort -nr' 	--abbrev-commit --date=short  --source --numstat > developers_numstat.csv
+git log  --pretty=format:'%an;%as;%cn;%cr;\\n%s%N;%cE;%s;%n| sort | uniq -c | sort -nr' --grep='fix' --abbrev-commit --date=short  --source --numstat > developers_numstat_fix.csv
+
 git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE' 		--date=short  --source --before=2014-12-31> source_2014.csv
+
 git log  --pretty=format:'%an;%as;%cn;%cr;%s%N;%cE'  		--date=short --source --numstat --before=2014-12-31> hostspot2014.csv
 
 ************* DATE MAX
